@@ -7,14 +7,6 @@
     <artifactId>summer-context</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-    <modules>
-        <module>summer-api</module>
-        <module>summer-biz</module>
-        <module>summer-cache</module>
-        <module>summer-db</module>
-        <module>summer-frame</module>
-        <module>summer-starter</module>
-    </modules>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -27,9 +19,19 @@
             <email>tinychiang@163.com</email>
         </developer>
     </developers>
+    <modules>
+        <module>summer-api</module>
+        <module>summer-biz</module>
+        <module>summer-cache</module>
+        <module>summer-db</module>
+        <module>summer-frame</module>
+        <module>summer-starter</module>
+    </modules>
     <properties>
         <summer.version>1.0.0</summer.version>
-        <spring.cloud-version>Hoxton.SR8</spring.cloud-version>
+        <spring.cloud.version>Hoxton.SR8</spring.cloud.version>
+        <spring-boot.version>2.5.2</spring-boot.version>
+        <swagger2.version>2.9.2</swagger2.version>
     </properties>
     <dependencies>
         <dependency>
@@ -43,17 +45,18 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring.cloud-version}</version>
+                <version>${spring.cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-parent</artifactId>
-                <version>2.5.2</version>
+                <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
+
 </project>
