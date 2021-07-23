@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>summer-context</artifactId>
+        <groupId>summer</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>summer-biz</artifactId>
+    <packaging>jar</packaging>
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>summer</groupId>
+            <artifactId>summer-frame</artifactId>
+            <version>${summer.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>summer</groupId>
+            <artifactId>summer-api</artifactId>
+            <version>${summer.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>summer</groupId>
+            <artifactId>summer-cache</artifactId>
+            <version>${summer.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>summer</groupId>
+            <artifactId>summer-db</artifactId>
+            <version>${summer.version}</version>
+        </dependency>
+    </dependencies>
+</project>
