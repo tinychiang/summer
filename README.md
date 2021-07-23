@@ -4,4 +4,4 @@
 Java Mesh Service - 技术与业务充分解耦网格服务架构，并最大可能集成所有微服务所需技术栈。
 
 ## 技术栈
-`Spring Cloud Netflix Eureka` `Spring Cloud Netflix Feign` `Spring Cloud Netflix Gateway` `Apollo` `Springboot` `Elasticsearch` `Redis` `MySQL` `Consul` `Zookeeper` `RocketMQ` `Kafka` `RabitMQ` `Spring Cloud alibaba Nacos` `Dubbo` `Spring Cloud alibaba Sentinel` `go-fastdfs` `durid` `Swagger` `Nginx` `Docker` `Arthas` `
+`Spring Cloud Netflix Eureka` `Spring Cloud Netflix Feign` `Spring Cloud Netflix Gateway` `Apollo` `Springboot` `Elasticsearch` `Redis` `MySQL` `Consul` `Zookeeper` `RocketMQ` `Kafka` `RabitMQ` `durid` `Mybatis plus` `xxl-job` `Spring Cloud alibaba Nacos` `Dubbo` `Spring Cloud alibaba Sentinel` `go-fastdfs` `Swagger` Arthas` `Nginx` `Docker` `
