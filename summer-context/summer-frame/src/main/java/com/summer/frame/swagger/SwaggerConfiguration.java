@@ -29,7 +29,6 @@ public class SwaggerConfiguration {
 
     @Bean
     public Docket createRestApi() {
-        // 请求头中添加token
         List<Parameter> parameters = new ArrayList<Parameter>() {{
             Parameter parameter = new ParameterBuilder()
                     .name("token")
