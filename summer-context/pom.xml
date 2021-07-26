@@ -32,12 +32,18 @@
         <spring.cloud.version>Hoxton.SR8</spring.cloud.version>
         <spring-boot.version>2.5.2</spring-boot.version>
         <swagger2.version>2.9.2</swagger2.version>
+        <fastjson.version>1.2.75</fastjson.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
         </dependency>
     </dependencies>
     <dependencyManagement>
@@ -58,5 +64,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
 </project>

@@ -27,14 +27,14 @@ public class PostServiceImpl implements PostService {
         return postOptional.orElse(null);
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void save(Post post) {
         postRepository.save(post);
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void delete(Long id) {
         Optional<Post> postOptional = postRepository.findById(id);
         postOptional.ifPresent(postRepository::delete);

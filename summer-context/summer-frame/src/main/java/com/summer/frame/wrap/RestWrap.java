@@ -10,8 +10,10 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * <p>RESTFul Response封装</p>
@@ -21,7 +23,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  * @date 2021-07-26
  */
 @ControllerAdvice
-public class Response implements ResponseBodyAdvice<Object> {
+public class RestWrap implements ResponseBodyAdvice<Object> {
+
+    private static final List<String> NOT_WRAPPER_URI = Arrays.asList("/error", "/v2/api-docs",
+            "/swagger-resources", "/swagger-resources/configuration/ui", "/swagger-resources/configuration/security");
 
     @ResponseBody
     @ExceptionHandler(CustomizeException.class)
@@ -38,14 +43,16 @@ public class Response implements ResponseBodyAdvice<Object> {
     @SuppressWarnings("all")
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> clazz) {
-        return clazz.isAnnotationPresent(RestController.class) || methodParameter.hasMethodAnnotation(ResponseBody.class);
+        return Boolean.TRUE;
     }
 
     @SuppressWarnings("all")
     @Override
     public Object beforeBodyWrite(Object object, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> clazz,
                                   ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-        return object;
+        if (object instanceof Wrapper || NOT_WRAPPER_URI.contains(serverHttpRequest.getURI().getPath())) {
+            return object;
+        }
+        return Wrapper.instance().success(object);
     }
-
 }
