@@ -1,4 +1,4 @@
-package com.summer.frame;
+package com.summer.frame.wrap;
 
 import lombok.Data;
 import org.springframework.http.HttpStatus;

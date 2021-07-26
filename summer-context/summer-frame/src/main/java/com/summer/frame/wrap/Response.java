@@ -1,6 +1,5 @@
 package com.summer.frame.wrap;
 
-import com.summer.frame.Wrapper;
 import com.summer.frame.exception.CustomizeException;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
@@ -22,7 +21,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  * @date 2021-07-26
  */
 @ControllerAdvice
-public class ResponseWrapper implements ResponseBodyAdvice<Object> {
+public class Response implements ResponseBodyAdvice<Object> {
 
     @ResponseBody
     @ExceptionHandler(CustomizeException.class)
