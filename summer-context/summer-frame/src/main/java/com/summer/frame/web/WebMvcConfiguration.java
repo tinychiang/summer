@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @date 2021-07-26
  */
 @Configuration
-public class WebConfiguration implements WebMvcConfigurer {
+public class WebMvcConfiguration implements WebMvcConfigurer {
 
     /**
      * 跨域
@@ -28,5 +28,4 @@ public class WebConfiguration implements WebMvcConfigurer {
                 .allowedMethods("POST", "GET", "PUT", "DELETE")
                 .allowedOrigins("*");
     }
-
 }

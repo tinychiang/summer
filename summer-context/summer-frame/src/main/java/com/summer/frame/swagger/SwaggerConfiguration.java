@@ -51,5 +51,4 @@ public class SwaggerConfiguration {
                 .build()
                 .globalOperationParameters(parameters);
     }
-
 }

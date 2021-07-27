@@ -1,5 +1,7 @@
 package com.summer.cache.es.document;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -17,21 +19,40 @@ import java.io.Serializable;
  */
 @Data
 @Document(indexName = "post")
+@ApiModel(value = "Post", description = "贴文信息")
 public class Post implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    /**
+     * Id
+     */
     @Id
+    @ApiModelProperty(value = "@Id")
     private Long id;
-
+    /**
+     * 名称
+     */
+    @ApiModelProperty(value = "贴文名称")
     private String name;
-
+    /**
+     * 类型
+     */
+    @ApiModelProperty(value = "贴文类型")
     private String type;
-
+    /**
+     * 作者
+     */
+    @ApiModelProperty(value = "贴文作者")
     private String author;
-
+    /**
+     * 发布日期
+     */
+    @ApiModelProperty(value = "发布日期")
     private String releaseDate;
-
+    /**
+     * 内容, 文本类型, standard分词
+     */
+    @ApiModelProperty(value = "贴文内容")
     @Field(type = FieldType.Text, analyzer = "standard")
     private String content;
 

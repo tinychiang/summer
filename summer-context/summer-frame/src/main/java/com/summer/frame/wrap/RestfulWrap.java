@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -65,7 +66,7 @@ public class RestfulWrap extends BasicErrorController implements ResponseBodyAdv
      * @author Tiny Chiang
      * @since 1.0.0
      */
-    @SuppressWarnings("all")
+    @SuppressWarnings("unchecked")
     @Override
     public ResponseEntity<Map<String, Object>> error(HttpServletRequest httpServletRequest) {
         HttpStatus status = super.getStatus(httpServletRequest);
@@ -75,16 +76,15 @@ public class RestfulWrap extends BasicErrorController implements ResponseBodyAdv
         return new ResponseEntity<>(map, status);
     }
 
-    @SuppressWarnings("all")
     @Override
-    public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> clazz) {
+    public boolean supports(@NonNull MethodParameter methodParameter, @NonNull Class<? extends HttpMessageConverter<?>> clazz) {
         return Boolean.TRUE;
     }
 
-    @SuppressWarnings("all")
     @Override
-    public Object beforeBodyWrite(Object object, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> clazz,
-                                  ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
+    public Object beforeBodyWrite(Object object, @NonNull MethodParameter methodParameter, @NonNull MediaType mediaType,
+                                  @NonNull Class<? extends HttpMessageConverter<?>> clazz, @NonNull ServerHttpRequest serverHttpRequest,
+                                  @NonNull ServerHttpResponse serverHttpResponse) {
         return object instanceof Wrapper || NOT_WRAPPER_URI.contains(serverHttpRequest.getURI().getPath()) ?
                 object : Wrapper.instance().success(object);
     }
