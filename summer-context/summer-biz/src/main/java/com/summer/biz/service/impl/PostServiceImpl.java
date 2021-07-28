@@ -2,11 +2,13 @@ package com.summer.biz.service.impl;
 
 import com.summer.biz.service.PostService;
 import com.summer.cache.es.document.Post;
+import com.summer.cache.es.dto.PostDTO;
 import com.summer.cache.es.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -38,6 +40,11 @@ public class PostServiceImpl implements PostService {
     public void delete(Long id) {
         Optional<Post> postOptional = postRepository.findById(id);
         postOptional.ifPresent(postRepository::delete);
+    }
+
+    @Override
+    public List<Post> aggregation(PostDTO.PostAggregation postAggregation) {
+        return null;
     }
 
     @Autowired

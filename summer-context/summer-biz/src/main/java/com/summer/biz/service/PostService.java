@@ -1,6 +1,7 @@
 package com.summer.biz.service;
 
 import com.summer.cache.es.document.Post;
+import com.summer.cache.es.dto.PostDTO;
 
 import java.util.List;
 
@@ -40,5 +41,15 @@ public interface PostService {
      * @since 1.0.0
      */
     void delete(Long id);
+
+    /**
+     * 聚合查询
+     *
+     * @param postAggregation 聚合查询条件
+     * @return 数据集
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
+    List<Post> aggregation(PostDTO.PostAggregation postAggregation);
 
 }
