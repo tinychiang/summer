@@ -5,7 +5,7 @@ import com.summer.cache.es.stereotype.enums.Link;
 import java.lang.annotation.*;
 
 /**
- * 属性声明
+ * 属性
  *
  * @author Tiny Chiang
  * @version 1.0.0
