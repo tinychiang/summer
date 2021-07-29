@@ -1,7 +1,5 @@
 package com.summer.frame.elasticsearch;
 
-import com.summer.frame.elasticsearch.AbstractPageHelper;
-
 import java.util.List;
 import java.util.Map;
 
