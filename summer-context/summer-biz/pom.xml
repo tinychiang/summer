@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>summer</groupId>
-            <artifactId>summer-frame</artifactId>
+            <artifactId>summer-frame-web</artifactId>
             <version>${summer.version}</version>
         </dependency>
         <dependency>

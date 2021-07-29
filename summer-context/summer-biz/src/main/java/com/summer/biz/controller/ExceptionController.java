@@ -1,6 +1,6 @@
 package com.summer.biz.controller;
 
-import com.summer.frame.exception.CustomizeException;
+import com.summer.frame.web.exception.CustomizeException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -3,7 +3,6 @@ package com.summer.starter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScans;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
 
@@ -17,7 +16,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableAsync
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.summer.**"})
-@EnableElasticsearchRepositories(basePackages = {"com.summer.cache.es.repository"})
+@EnableElasticsearchRepositories(basePackages = {"com.summer.cache.elasticsearch.repository"})
 public class NetflixStarter {
 
     public static void main(String[] args) {

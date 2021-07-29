@@ -1,7 +1,7 @@
 package com.summer.biz.controller;
 
 import com.summer.biz.service.PostService;
-import com.summer.cache.es.document.Post;
+import com.summer.cache.elasticsearch.document.Post;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

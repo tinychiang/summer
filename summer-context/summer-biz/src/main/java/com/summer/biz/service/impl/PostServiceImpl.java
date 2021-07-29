@@ -1,9 +1,9 @@
 package com.summer.biz.service.impl;
 
 import com.summer.biz.service.PostService;
-import com.summer.cache.es.document.Post;
-import com.summer.cache.es.dto.PostDTO;
-import com.summer.cache.es.repository.PostRepository;
+import com.summer.cache.elasticsearch.document.Post;
+import com.summer.cache.elasticsearch.dto.PostDTO;
+import com.summer.cache.elasticsearch.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,7 +43,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> aggregation(PostDTO.PostAggregation postAggregation) {
+    public List<Post> complicatedQuery(PostDTO.FilterAggregation filterAggregation) {
         return null;
     }
 
