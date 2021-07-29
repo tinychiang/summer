@@ -1,4 +1,4 @@
-package com.summer.frame.elasticsearch.stereotype.enums;
+package com.summer.frame.elasticsearch.enums;
 
 /**
  * 连接条件

@@ -9,7 +9,6 @@ import lombok.Getter;
  * @version 1.0.0
  * @date 2021-07-26
  */
-@SuppressWarnings("unused")
 public class CustomizeException extends RuntimeException {
 
     @Getter

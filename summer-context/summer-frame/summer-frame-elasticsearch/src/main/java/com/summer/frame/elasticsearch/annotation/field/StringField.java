@@ -1,6 +1,6 @@
-package com.summer.frame.elasticsearch.stereotype.annotation.field;
+package com.summer.frame.elasticsearch.annotation.field;
 
-import com.summer.frame.elasticsearch.stereotype.enums.Link;
+import com.summer.frame.elasticsearch.enums.Link;
 import org.elasticsearch.index.query.Operator;
 
 import java.lang.annotation.*;

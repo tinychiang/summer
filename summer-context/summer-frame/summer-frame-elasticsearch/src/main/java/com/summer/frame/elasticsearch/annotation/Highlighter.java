@@ -1,4 +1,4 @@
-package com.summer.frame.elasticsearch.stereotype.annotation;
+package com.summer.frame.elasticsearch.annotation;
 
 import java.lang.annotation.*;
 

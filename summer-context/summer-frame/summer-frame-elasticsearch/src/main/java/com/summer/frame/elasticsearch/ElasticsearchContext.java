@@ -1,6 +1,5 @@
-package com.summer.frame.elasticsearch.stereotype;
+package com.summer.frame.elasticsearch;
 
-import com.summer.frame.elasticsearch.AbstractPageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.stereotype.Component;
@@ -43,7 +42,7 @@ public class ElasticsearchContext implements ElasticsearchMajor {
     }
 
     /**
-     * 判断属性是否为基本类型或者基本类型的封装类型
+     * 判断对象为基本类型或基本封装类型
      *
      * @param object 对象
      * @return true: 符合, false: 不符合

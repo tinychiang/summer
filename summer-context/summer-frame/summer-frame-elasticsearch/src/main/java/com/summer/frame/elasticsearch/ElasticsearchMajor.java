@@ -1,4 +1,4 @@
-package com.summer.frame.elasticsearch.stereotype;
+package com.summer.frame.elasticsearch;
 
 import com.summer.frame.elasticsearch.AbstractPageHelper;
 

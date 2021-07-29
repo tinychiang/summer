@@ -1,20 +1,21 @@
-package com.summer.frame.elasticsearch.stereotype.annotation.field;
+package com.summer.frame.elasticsearch.annotation.field;
 
-import com.summer.frame.elasticsearch.stereotype.enums.Link;
+import com.summer.frame.elasticsearch.enums.Link;
+import com.summer.frame.elasticsearch.enums.Range;
 
 import java.lang.annotation.*;
 
 /**
- * 模糊检索
+ * 区间检索
  *
- * @author tianyi.jiang
+ * @author Tiny Chiang
  * @version 1.0.0
  * @date 2021-07-28
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface WildcardField {
+public @interface RangeField {
 
     /**
      * 指定查询字段
@@ -31,17 +32,15 @@ public @interface WildcardField {
     Link link() default Link.MUST;
 
     /**
-     * "*" 前缀
+     * 区间检索条件
      *
-     * @return 默认 false
+     * @return 默认不处理
      */
-    boolean enablePrefix() default false;
+    Range range() default Range.NONE;
 
     /**
-     * "*" 后缀
-     *
-     * @return 默认 false
+     * 格式化属性值; yyyy-MM-dd HH:mm:ss
      */
-    boolean enableSuffix() default false;
+    String format() default "";
 
 }

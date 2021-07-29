@@ -1,20 +1,21 @@
-package com.summer.frame.elasticsearch.stereotype.annotation.field;
+package com.summer.frame.elasticsearch.annotation.field;
 
-import com.summer.frame.elasticsearch.stereotype.enums.Link;
+
+import com.summer.frame.elasticsearch.enums.Link;
 
 import java.lang.annotation.*;
 
 /**
- * 非分词检索
+ * 属性
  *
  * @author Tiny Chiang
  * @version 1.0.0
  * @date 2021-07-28
  */
-@Target(ElementType.FIELD)
+@Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface TermField {
+public @interface BoolField {
 
     /**
      * 指定查询字段

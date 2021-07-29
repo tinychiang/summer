@@ -1,8 +1,8 @@
 package com.summer.cache.elasticsearch.dto;
 
 import com.summer.frame.elasticsearch.AbstractPageHelper;
-import com.summer.frame.elasticsearch.stereotype.annotation.Document;
-import com.summer.frame.elasticsearch.stereotype.annotation.field.TermField;
+import com.summer.frame.elasticsearch.annotation.Document;
+import com.summer.frame.elasticsearch.annotation.field.TermField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

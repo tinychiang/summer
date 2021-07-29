@@ -25,6 +25,7 @@
         <module>summer-cache</module>
         <module>summer-db</module>
         <module>summer-frame</module>
+        <module>summer-queue</module>
         <module>summer-starter</module>
     </modules>
     <properties>
