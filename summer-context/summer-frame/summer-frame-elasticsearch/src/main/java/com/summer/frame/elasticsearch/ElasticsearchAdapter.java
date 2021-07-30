@@ -2,8 +2,6 @@ package com.summer.frame.elasticsearch;
 
 import org.springframework.data.elasticsearch.core.SearchHits;
 
-import java.util.List;
-
 /**
  * 条件筛选、聚合检索等
  *
@@ -11,7 +9,7 @@ import java.util.List;
  * @version 1.0.0
  * @date 2021-07-28
  */
-public interface ElasticsearchMajor {
+public interface ElasticsearchAdapter {
 
     /**
      * 分页 / 排序 / 条件 / 聚合筛选统计, 并指定返回类型

@@ -98,7 +98,7 @@ public abstract class AbstractPageHelper implements Serializable {
     }
 
     @Data
-    protected static class Sorter {
+    public static class Sorter {
         /**
          * 排序字段
          */

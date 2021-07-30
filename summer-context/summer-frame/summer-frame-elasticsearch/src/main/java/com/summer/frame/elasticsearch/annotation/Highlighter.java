@@ -15,32 +15,32 @@ import java.lang.annotation.*;
 public @interface Highlighter {
 
     /**
-     * 指定查询字段
+     * 指定高亮字段
      */
     String field();
 
     /**
      * 前缀
      */
-    String prefix() default "";
+    String[] preTags() default {};
 
     /**
      * 尾缀
      */
-    String suffix() default "";
+    String[] postTags() default {};
 
     /**
      * 高亮后显示长度
      *
-     * @return 默认-1, 不处理
+     * @return 默认 -1
      */
     int fragmentSize() default -1;
 
     /**
      * 显示高亮片段
      *
-     * @return 默认-1, 不处理
+     * @return 默认 0
      */
-    int numOfFragments() default -1;
+    int numOfFragments() default 0;
 
 }

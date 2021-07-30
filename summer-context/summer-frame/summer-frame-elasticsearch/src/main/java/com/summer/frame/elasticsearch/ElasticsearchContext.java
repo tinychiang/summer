@@ -1,6 +1,7 @@
 package com.summer.frame.elasticsearch;
 
 import com.summer.frame.elasticsearch.annotation.Document;
+import com.summer.frame.elasticsearch.assembly.NativeSearchQueryAssembly;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
@@ -19,19 +20,20 @@ import org.springframework.util.Assert;
  * @date 2021-07-28
  */
 @Component
-public class ElasticsearchContext implements ElasticsearchMajor {
+public class ElasticsearchContext implements ElasticsearchAdapter {
 
     private final ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     @Override
     public <T, E> SearchHits<E> search(@NonNull T condition, Class<E> target) {
+        Query query = NativeSearchQueryAssembly.instance(condition).assembly();
         Class<?> clazz = condition.getClass();
         if (clazz.isAnnotationPresent(Document.class)) {
             Document document = clazz.getAnnotation(Document.class);
-            return elasticsearchRestTemplate.search(this.queryBuilder(condition), target, IndexCoordinates.of(document.indices()));
+            return elasticsearchRestTemplate.search(query, target, IndexCoordinates.of(document.indices()));
         }
         // 未定义索引时全库检索
-        return elasticsearchRestTemplate.search(this.queryBuilder(condition), target);
+        return elasticsearchRestTemplate.search(query, target);
     }
 
     @Override
@@ -44,37 +46,10 @@ public class ElasticsearchContext implements ElasticsearchMajor {
         // 游标生效时间
         long scrollTimeInMillis = condition.getScrollTimeInMillis();
         if (StringUtils.isEmpty(scrollId)) {
-            elasticsearchRestTemplate.searchScrollStart(scrollTimeInMillis, this.queryBuilder(condition), target, IndexCoordinates.of(indices));
+            Query query = NativeSearchQueryAssembly.instance(condition).assembly();
+            elasticsearchRestTemplate.searchScrollStart(scrollTimeInMillis, query, target, IndexCoordinates.of(indices));
         }
         return elasticsearchRestTemplate.searchScrollContinue(scrollId, scrollTimeInMillis, target, IndexCoordinates.of(indices));
-    }
-
-    private <T> Query queryBuilder(T condition) {
-        return Query.findAll();
-    }
-
-    /**
-     * 判断对象为基本类型或基本封装类型
-     *
-     * @param object 对象
-     * @return true: 符合, false: 不符合
-     * @author Tiny Chiang
-     * @since 1.0.0
-     */
-    private boolean isPrimitive(Object object) {
-        if (object != null) {
-            return object.getClass().isPrimitive() ||
-                    object instanceof String ||
-                    object instanceof Integer ||
-                    object instanceof Long ||
-                    object instanceof Double ||
-                    object instanceof Boolean ||
-                    object instanceof Float ||
-                    object instanceof Byte ||
-                    object instanceof Character ||
-                    object instanceof Short;
-        }
-        return false;
     }
 
     @Autowired

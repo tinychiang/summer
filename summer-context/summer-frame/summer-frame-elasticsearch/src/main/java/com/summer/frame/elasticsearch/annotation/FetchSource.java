@@ -3,22 +3,29 @@ package com.summer.frame.elasticsearch.annotation;
 import java.lang.annotation.*;
 
 /**
- * 排序
+ * 过滤 / 排除字段
  *
  * @author Tiny Chiang
  * @version 1.0.0
  * @date 2021-07-28
  */
-@Target(ElementType.METHOD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface Sorter {
+public @interface FetchSource {
 
     /**
-     * 排序脚本
+     * 包含字段
      *
      * @return 默认空
      */
-    String script() default "";
+    String[] includes() default {};
+
+    /**
+     * 排除字段
+     *
+     * @return 默认空
+     */
+    String[] excludes() default {};
 
 }
