@@ -55,5 +55,4 @@ public class Post implements Serializable {
     @ApiModelProperty(value = "贴文内容")
     @Field(type = FieldType.Text, analyzer = "standard")
     private String content;
-
 }

@@ -1,7 +1,8 @@
 package com.summer.frame.elasticsearch;
 
+import org.springframework.data.elasticsearch.core.SearchHits;
+
 import java.util.List;
-import java.util.Map;
 
 /**
  * 条件筛选、聚合检索等
@@ -13,48 +14,29 @@ import java.util.Map;
 public interface ElasticsearchMajor {
 
     /**
-     * 分页、排序、条件聚合筛选统计
+     * 分页 / 排序 / 条件 / 聚合筛选统计, 并指定返回类型
      *
-     * @param condition 查询条件
+     * @param condition 条件
+     * @param target    转换目标类
+     * @param <T>       条件类型, 继承分页助手
+     * @param <E>       返回类型
      * @return 结果集
      * @author Tiny Chiang
      * @since 1.0.0
      */
-    <S extends AbstractPageHelper> List<Map<String, Object>> search(S condition);
-
-    /**
-     * 分页、排序、条件聚合筛选统计
-     *
-     * @param condition 查询条件
-     * @param clazz     转换目标类
-     * @param <S>       入参类型
-     * @param <T>       出参类型
-     * @return 结果集
-     * @author Tiny Chiang
-     * @since 1.0.0
-     */
-    <S extends AbstractPageHelper, T> List<T> search(S condition, Class<T> clazz);
+    <T, E> SearchHits<E> search(T condition, Class<E> target);
 
     /**
      * 游标查询
      *
-     * @param scrollId 游标Id
+     * @param condition 条件
+     * @param target    转换目标类
+     * @param <T>       条件类型, 继承分页助手
+     * @param <E>       返回类型
      * @return 结果集
      * @author Tiny Chiang
      * @since 1.0.0
      */
-    List<Map<String, Object>> searchByScroll(String scrollId);
-
-    /**
-     * 游标查询
-     *
-     * @param scrollId 游标Id
-     * @param clazz    转换目标类
-     * @param <T>      出参类型
-     * @return 结果集
-     * @author Tiny Chiang
-     * @since 1.0.0
-     */
-    <T> List<T> searchByScroll(String scrollId, Class<T> clazz);
+    <T extends AbstractPageHelper, E> SearchHits<E> scrollSearch(T condition, Class<E> target);
 
 }

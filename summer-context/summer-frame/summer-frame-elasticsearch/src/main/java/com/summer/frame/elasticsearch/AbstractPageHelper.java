@@ -2,7 +2,7 @@ package com.summer.frame.elasticsearch;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.collections4.KeyValue;
+import lombok.Data;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.util.Assert;
 
@@ -35,15 +35,20 @@ public abstract class AbstractPageHelper implements Serializable {
     @ApiModelProperty(value = "数量")
     private Integer size;
     /**
+     * 条件排序集合; KeyValue - K: 字段名称, V: 排序规则
+     */
+    @ApiModelProperty(value = "排序")
+    private List<Sorter> sorters;
+    /**
      * 超过最大查询深度, 使用游标查询
      */
     @ApiModelProperty(value = "游标")
     private String scrollId;
     /**
-     * 条件排序集合; KeyValue - K: 字段名称, V: 排序规则
+     * 游标生效时间; 默认5分钟
      */
-    @ApiModelProperty(value = "排序")
-    private List<KeyValue<String, SortOrder>> sorters;
+    @ApiModelProperty(value = "游标生效时间")
+    private Long scrollTimeInMillis;
 
     public Integer getFrom() {
         from = from == null || from < 0 ? 0 : from;
@@ -68,6 +73,14 @@ public abstract class AbstractPageHelper implements Serializable {
         this.size = size;
     }
 
+    public List<Sorter> getSorters() {
+        return sorters;
+    }
+
+    public void setSorters(List<Sorter> sorters) {
+        this.sorters = sorters;
+    }
+
     public String getScrollId() {
         return scrollId;
     }
@@ -76,11 +89,24 @@ public abstract class AbstractPageHelper implements Serializable {
         this.scrollId = scrollId;
     }
 
-    public List<KeyValue<String, SortOrder>> getSorters() {
-        return sorters;
+    public Long getScrollTimeInMillis() {
+        return scrollTimeInMillis == null || scrollTimeInMillis < 0L ? 300000 : scrollTimeInMillis;
     }
 
-    public void setSorters(List<KeyValue<String, SortOrder>> sorters) {
-        this.sorters = sorters;
+    public void setScrollTimeInMillis(Long scrollTimeInMillis) {
+        this.scrollTimeInMillis = scrollTimeInMillis;
     }
+
+    @Data
+    protected static class Sorter {
+        /**
+         * 排序字段
+         */
+        private String field;
+        /**
+         * 升序 / 降序
+         */
+        private SortOrder sortOrder;
+    }
+
 }
