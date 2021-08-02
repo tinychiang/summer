@@ -1,7 +1,5 @@
 package com.summer.frame.elasticsearch.annotation;
 
-import com.summer.frame.elasticsearch.annotation.agg.*;
-
 import java.lang.annotation.*;
 
 /**
@@ -16,16 +14,6 @@ import java.lang.annotation.*;
 @Documented
 public @interface Aggregations {
 
-    Avg[] avg() default {};
-
-    Count[] count() default {};
-
-    DateHistogram[] dateHistogram() default {};
-
-    Max[] max() default {};
-
-    Min[] min() default {};
-
-    Sum[] sum() default {};
+    Aggregation[] aggregations();
 
 }
