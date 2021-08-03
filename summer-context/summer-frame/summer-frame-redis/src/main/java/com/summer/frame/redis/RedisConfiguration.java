@@ -17,9 +17,10 @@ import org.springframework.stereotype.Component;
  *
  * @author Tiny Chiang
  * @version 1.0.0
+ * @date 2021-08-03
  */
 @Component
-public class RedisAdapter {
+public class RedisConfiguration {
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
