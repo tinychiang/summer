@@ -11,6 +11,7 @@ import java.lang.annotation.*;
  * @version 1.0.0
  * @date 2021-07-30
  */
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface Aggregation {

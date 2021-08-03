@@ -1,5 +1,7 @@
 package com.summer.frame.elasticsearch.annotation;
 
+import com.summer.frame.elasticsearch.enums.Link;
+
 import java.lang.annotation.*;
 
 /**
@@ -15,8 +17,15 @@ import java.lang.annotation.*;
 public @interface Cascade {
 
     /**
-     * 级联字段数组
+     * 级联字段
      */
     String[] fields();
+
+    /**
+     * 条件连接方式
+     *
+     * @return 默认 MUST
+     */
+    Link link() default Link.MUST;
 
 }

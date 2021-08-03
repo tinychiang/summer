@@ -2,9 +2,18 @@ package com.summer.frame.elasticsearch.assembly;
 
 import com.summer.frame.elasticsearch.AbstractPageHelper;
 import com.summer.frame.elasticsearch.annotation.*;
+import com.summer.frame.elasticsearch.annotation.field.RangeField;
+import com.summer.frame.elasticsearch.annotation.field.StringField;
+import com.summer.frame.elasticsearch.annotation.field.TermField;
+import com.summer.frame.elasticsearch.annotation.field.WildcardField;
+import com.summer.frame.elasticsearch.enums.Link;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.KeyValue;
+import org.apache.commons.collections4.keyvalue.DefaultKeyValue;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.elasticsearch.index.query.*;
 import org.elasticsearch.script.Script;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
@@ -19,11 +28,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.query.FetchSourceFilter;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
-import org.springframework.util.Assert;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.lang.reflect.Field;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -45,6 +52,8 @@ public class NativeSearchQueryAssembly<T> {
     private NativeSearchQueryAssembly(T condition) {
         this.condition = condition;
         this.clazz = condition.getClass();
+        this.boolQueryBuilder = QueryBuilders.boolQuery();
+        this.nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
     }
 
     @SuppressWarnings("unchecked")
@@ -63,53 +72,60 @@ public class NativeSearchQueryAssembly<T> {
 
     private final T condition;
 
-    private final NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
+    private final BoolQueryBuilder boolQueryBuilder;
+
+    private final NativeSearchQueryBuilder nativeSearchQueryBuilder;
 
     public NativeSearchQuery assembly() {
-        if (clazz.isAnnotationPresent(SearchType.class)) {
+        if (this.clazz.isAnnotationPresent(SearchType.class)) {
             this.searchType();
         }
-        if (clazz.isAnnotationPresent(FetchSource.class)) {
+        if (this.clazz.isAnnotationPresent(FetchSource.class)) {
             this.fetchSourceFilter();
         }
-        if (clazz.isAnnotationPresent(ScriptSorter.class)) {
+        if (this.clazz.isAnnotationPresent(ScriptSorter.class)) {
             this.scriptSort();
         }
-        if (clazz.isAnnotationPresent(Highlighters.class)) {
+        if (this.clazz.isAnnotationPresent(Highlighters.class)) {
             this.highlighters();
-        } else if (clazz.isAnnotationPresent(Highlighter.class)) {
+        }
+        if (this.clazz.isAnnotationPresent(Highlighter.class)) {
             this.highlighter();
         }
-        if (condition instanceof AbstractPageHelper) {
-            this.fieldSort();
-        }
-        if (clazz.isAnnotationPresent(Aggregations.class)) {
+        if (this.clazz.isAnnotationPresent(Aggregations.class)) {
             this.aggregations();
         }
-        return nativeSearchQueryBuilder.build();
+        if (this.clazz.isAnnotationPresent(Aggregation.class)) {
+            this.aggregation();
+        }
+        if (this.condition instanceof AbstractPageHelper) {
+            this.fieldSort();
+        }
+        this.queryBuilder();
+        return this.nativeSearchQueryBuilder.build();
     }
 
     private void searchType() {
-        SearchType searchType = clazz.getAnnotation(SearchType.class);
-        nativeSearchQueryBuilder.withSearchType(searchType.searchType());
+        SearchType searchType = this.clazz.getAnnotation(SearchType.class);
+        this.nativeSearchQueryBuilder.withSearchType(searchType.searchType());
     }
 
     private void fetchSourceFilter() {
-        FetchSource fetchSource = clazz.getAnnotation(FetchSource.class);
+        FetchSource fetchSource = this.clazz.getAnnotation(FetchSource.class);
         FetchSourceFilter fetchSourceFilter = new FetchSourceFilter(fetchSource.includes(), fetchSource.excludes());
-        nativeSearchQueryBuilder.withSourceFilter(fetchSourceFilter);
+        this.nativeSearchQueryBuilder.withSourceFilter(fetchSourceFilter);
     }
 
     private void highlighters() {
-        Highlighters highlighters = clazz.getAnnotation(Highlighters.class);
+        Highlighters highlighters = this.clazz.getAnnotation(Highlighters.class);
         HighlightBuilder.Field[] fields = Arrays.stream(highlighters.highlighters()).map(this::highlighter).toArray(HighlightBuilder.Field[]::new);
-        nativeSearchQueryBuilder.withHighlightFields(fields);
+        this.nativeSearchQueryBuilder.withHighlightFields(fields);
     }
 
     private void highlighter() {
-        Highlighter highlighter = clazz.getAnnotation(Highlighter.class);
+        Highlighter highlighter = this.clazz.getAnnotation(Highlighter.class);
         HighlightBuilder.Field field = this.highlighter(highlighter);
-        nativeSearchQueryBuilder.withHighlightFields(field);
+        this.nativeSearchQueryBuilder.withHighlightFields(field);
     }
 
     private HighlightBuilder.Field highlighter(Highlighter highlighter) {
@@ -121,46 +137,51 @@ public class NativeSearchQueryAssembly<T> {
     }
 
     private void scriptSort() {
-        ScriptSorter scriptSorter = clazz.getAnnotation(ScriptSorter.class);
+        ScriptSorter scriptSorter = this.clazz.getAnnotation(ScriptSorter.class);
         ScriptSortBuilder scriptSortBuilder = SortBuilders.scriptSort(new Script(scriptSorter.script()), scriptSorter.scriptSortType());
-        nativeSearchQueryBuilder.withSort(scriptSortBuilder);
+        this.nativeSearchQueryBuilder.withSort(scriptSortBuilder);
     }
 
     private void fieldSort() {
-        AbstractPageHelper abstractPageHelper = (AbstractPageHelper) condition;
+        AbstractPageHelper abstractPageHelper = (AbstractPageHelper) this.condition;
         this.pageable(abstractPageHelper.getFrom(), abstractPageHelper.getSize());
         this.fieldSort(abstractPageHelper.getSorters());
     }
 
     private void pageable(int from, int size) {
-        nativeSearchQueryBuilder.withPageable(PageRequest.of(from, size));
+        this.nativeSearchQueryBuilder.withPageable(PageRequest.of(from, size));
     }
 
     private void fieldSort(List<AbstractPageHelper.Sorter> sorters) {
         if (CollectionUtils.isNotEmpty(sorters)) {
             sorters.forEach(sorter -> {
                 SortBuilder<FieldSortBuilder> sortBuilder = SortBuilders.fieldSort(sorter.getField()).order(sorter.getSortOrder());
-                nativeSearchQueryBuilder.withSort(sortBuilder);
+                this.nativeSearchQueryBuilder.withSort(sortBuilder);
             });
         }
     }
 
     private void aggregations() {
-        Aggregation[] aggregations = clazz.getAnnotation(Aggregations.class).aggregations();
+        Aggregation[] aggregations = this.clazz.getAnnotation(Aggregations.class).aggregations();
         List<Aggregation> roots = Arrays.stream(aggregations).filter(Aggregation::root).collect(Collectors.toList());
         if (CollectionUtils.isNotEmpty(roots)) {
             roots.forEach(aggregation -> {
                 AbstractAggregationBuilder<?> abstractAggregationBuilder = this.aggregationBuilder(aggregation);
-                Assert.notNull(abstractAggregationBuilder, "Can not build aggregation.");
                 while (StringUtils.isNotEmpty(aggregation.subName())) {
                     aggregation = this.subAggregation(aggregation.subName());
                     abstractAggregationBuilder.subAggregation(this.aggregationBuilder(aggregation));
                 }
-                nativeSearchQueryBuilder.addAggregation(abstractAggregationBuilder);
+                this.nativeSearchQueryBuilder.addAggregation(abstractAggregationBuilder);
             });
         } else {
             throw new IllegalArgumentException("Can not find root aggregation");
         }
+    }
+
+    private void aggregation() {
+        Aggregation aggregation = this.clazz.getAnnotation(Aggregation.class);
+        AbstractAggregationBuilder<?> abstractAggregationBuilder = this.aggregationBuilder(aggregation);
+        this.nativeSearchQueryBuilder.addAggregation(abstractAggregationBuilder);
     }
 
     private AbstractAggregationBuilder<?> aggregationBuilder(Aggregation aggregation) {
@@ -178,12 +199,12 @@ public class NativeSearchQueryAssembly<T> {
             case SUM:
                 return this.sum(aggregation);
             default:
-                return null;
+                throw new IllegalArgumentException("Can not build aggregation.");
         }
     }
 
     private Aggregation subAggregation(String subName) {
-        Aggregation[] aggregations = clazz.getAnnotation(Aggregations.class).aggregations();
+        Aggregation[] aggregations = this.clazz.getAnnotation(Aggregations.class).aggregations();
         Optional<Aggregation> optional = Stream.of(aggregations).filter(aggregation -> aggregation.name().equals(subName)).findFirst();
         if (optional.isPresent()) {
             return optional.get();
@@ -213,6 +234,150 @@ public class NativeSearchQueryAssembly<T> {
 
     private SumAggregationBuilder sum(Aggregation aggregation) {
         return AggregationBuilders.sum(aggregation.name()).field(aggregation.field());
+    }
+
+    private void queryBuilder() {
+        List<String> excludes = ObjectUtils.defaultIfNull(this.cascadesQuery(), Collections.emptyList());
+        Stream.of(this.clazz.getDeclaredFields()).forEach(field -> {
+            if (!excludes.contains(field.getName())) {
+                this.basicQueryAssembly(field, this.boolQueryBuilder);
+            }
+        });
+        this.nativeSearchQueryBuilder.withQuery(this.boolQueryBuilder);
+    }
+
+    private List<String> cascadesQuery() {
+        if (this.clazz.isAnnotationPresent(Cascades.class)) {
+            Cascade[] cascades = this.clazz.getAnnotation(Cascades.class).cascades();
+            return new ArrayList<String>() {{
+                Stream.of(cascades).forEach(cascade -> {
+                    cascadeQuery(cascade);
+                    Collections.addAll(this, cascade.fields());
+                });
+            }};
+        }
+        if (this.clazz.isAnnotationPresent(Cascade.class)) {
+            Cascade cascade = this.clazz.getAnnotation(Cascade.class);
+            this.cascadeQuery(cascade);
+            return Stream.of(cascade.fields()).collect(Collectors.toList());
+        }
+        return null;
+    }
+
+    private void cascadeQuery(Cascade cascade) {
+        BoolQueryBuilder cascadeBoolQueryBuilder = QueryBuilders.boolQuery();
+        Stream.of(cascade.fields()).forEach(fieldName -> {
+            try {
+                Field field = this.clazz.getField(fieldName);
+                this.basicQueryAssembly(field, cascadeBoolQueryBuilder);
+            } catch (NoSuchFieldException e) {
+                throw new IllegalArgumentException("Can not find root aggregation.", e);
+            }
+        });
+        this.linkQuery(this.boolQueryBuilder, cascadeBoolQueryBuilder, cascade.link());
+    }
+
+    private void basicQueryAssembly(Field field, BoolQueryBuilder boolQueryBuilder) {
+        if (field.isAnnotationPresent(RangeField.class)) {
+            RangeField rangeField = field.getAnnotation(RangeField.class);
+            RangeQueryBuilder rangeQueryBuilder = this.rangeQuery(field, rangeField);
+            this.linkQuery(boolQueryBuilder, rangeQueryBuilder, rangeField.link());
+        }
+        if (field.isAnnotationPresent(StringField.class)) {
+            StringField stringField = field.getAnnotation(StringField.class);
+            QueryStringQueryBuilder queryStringQueryBuilder = this.stringQuery(field, stringField);
+            this.linkQuery(boolQueryBuilder, queryStringQueryBuilder, stringField.link());
+        }
+        if (field.isAnnotationPresent(TermField.class)) {
+            TermField termField = field.getAnnotation(TermField.class);
+            TermQueryBuilder termQueryBuilder = this.termQuery(field, termField);
+            this.linkQuery(boolQueryBuilder, termQueryBuilder, termField.link());
+        }
+        if (field.isAnnotationPresent(WildcardField.class)) {
+            WildcardField wildcardField = field.getAnnotation(WildcardField.class);
+            WildcardQueryBuilder wildcardQueryBuilder = this.wildcardQuery(field, wildcardField);
+            this.linkQuery(boolQueryBuilder, wildcardQueryBuilder, wildcardField.link());
+        }
+    }
+
+    private RangeQueryBuilder rangeQuery(Field field, RangeField rangeField) {
+        KeyValue<String, Object> fieldValue = this.fieldValue(field, rangeField.field());
+        RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery(fieldValue.getKey());
+        switch (rangeField.range()) {
+            case GTE:
+                rangeQueryBuilder.gte(fieldValue.getValue());
+                break;
+            case LTE:
+                rangeQueryBuilder.lte(fieldValue.getValue());
+                break;
+            default:
+                break;
+        }
+        if (StringUtils.isNotEmpty(rangeField.format())) {
+            rangeQueryBuilder.format(rangeField.format());
+        }
+        return rangeQueryBuilder;
+    }
+
+    private QueryStringQueryBuilder stringQuery(Field field, StringField stringField) {
+        KeyValue<String, Object> fieldValue = this.fieldValue(field, stringField.field());
+        return QueryBuilders.queryStringQuery((String) fieldValue.getValue())
+                .defaultField(fieldValue.getKey())
+                .defaultOperator(stringField.operator());
+    }
+
+    private TermQueryBuilder termQuery(Field field, TermField termField) {
+        KeyValue<String, Object> fieldValue = this.fieldValue(field, termField.field());
+        return QueryBuilders.termQuery(fieldValue.getKey(), fieldValue.getValue());
+    }
+
+    private WildcardQueryBuilder wildcardQuery(Field field, WildcardField wildcardField) {
+        KeyValue<String, Object> fieldValue = this.fieldValue(field, wildcardField.field());
+        return QueryBuilders.wildcardQuery(fieldValue.getKey(), (String) fieldValue.getValue());
+    }
+
+    /**
+     * 条件连接
+     *
+     * @param source 原条件
+     * @param target 目标条件
+     * @param link   连接方式
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
+    private void linkQuery(BoolQueryBuilder source, QueryBuilder target, Link link) {
+        switch (link) {
+            case MUST:
+                source.must(target);
+                break;
+            case SHOULD:
+                source.should(target);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * 获取字段值
+     *
+     * @param field       字段
+     * @param customField 自定义字段名称
+     * @return 无法获取或非基本类型或基本封装类型, 抛出异常
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
+    private KeyValue<String, Object> fieldValue(Field field, String customField) {
+        try {
+            if (this.isPrimitive(field)) {
+                field.setAccessible(Boolean.TRUE);
+                String name = StringUtils.isEmpty(customField) ? field.getName() : customField;
+                return new DefaultKeyValue<>(name, field.get(this.condition));
+            }
+            throw new IllegalArgumentException(String.format("Field: <%s>. That is not primitive.", field.getName()));
+        } catch (IllegalArgumentException | IllegalAccessException e) {
+            throw new IllegalArgumentException("Can not get field value by reflection.", e);
+        }
     }
 
     /**

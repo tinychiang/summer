@@ -16,8 +16,4 @@ public enum Range {
      * 结束
      */
     LTE,
-    /**
-     * 不处理
-     */
-    NONE
 }

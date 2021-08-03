@@ -36,7 +36,7 @@ public @interface RangeField {
      *
      * @return 默认不处理
      */
-    Range range() default Range.NONE;
+    Range range();
 
     /**
      * 格式化属性值; yyyy-MM-dd HH:mm:ss
