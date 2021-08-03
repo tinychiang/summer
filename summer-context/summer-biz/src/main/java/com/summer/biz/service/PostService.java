@@ -2,6 +2,8 @@ package com.summer.biz.service;
 
 import com.summer.cache.elasticsearch.document.Post;
 import com.summer.cache.elasticsearch.dto.PostDTO;
+import com.summer.cache.elasticsearch.vo.PostVO;
+import org.springframework.data.elasticsearch.core.SearchHits;
 
 import java.util.List;
 
@@ -50,6 +52,6 @@ public interface PostService {
      * @author Tiny Chiang
      * @since 1.0.0
      */
-    List<Post> complicatedQuery(PostDTO.FilterAggregation filterAggregation);
+    List<PostVO> complicatedQuery(PostDTO.FilterAggregation filterAggregation);
 
 }
