@@ -13,7 +13,11 @@ public enum Link {
      */
     MUST,
     /**
+     * 均不满足
+     */
+    MUST_NOT,
+    /**
      * 满足其中之一
      */
-    SHOULD
+    SHOULD;
 }

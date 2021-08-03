@@ -274,29 +274,29 @@ public class NativeSearchQueryAssembly<T> {
                 throw new IllegalArgumentException("Can not find root aggregation.", e);
             }
         });
-        this.linkQuery(this.boolQueryBuilder, cascadeBoolQueryBuilder, cascade.link());
+        this.queryLink(this.boolQueryBuilder, cascadeBoolQueryBuilder, cascade.link());
     }
 
     private void basicQueryAssembly(Field field, BoolQueryBuilder boolQueryBuilder) {
         if (field.isAnnotationPresent(RangeField.class)) {
             RangeField rangeField = field.getAnnotation(RangeField.class);
             RangeQueryBuilder rangeQueryBuilder = this.rangeQuery(field, rangeField);
-            this.linkQuery(boolQueryBuilder, rangeQueryBuilder, rangeField.link());
+            this.queryLink(boolQueryBuilder, rangeQueryBuilder, rangeField.link());
         }
         if (field.isAnnotationPresent(StringField.class)) {
             StringField stringField = field.getAnnotation(StringField.class);
             QueryStringQueryBuilder queryStringQueryBuilder = this.stringQuery(field, stringField);
-            this.linkQuery(boolQueryBuilder, queryStringQueryBuilder, stringField.link());
+            this.queryLink(boolQueryBuilder, queryStringQueryBuilder, stringField.link());
         }
         if (field.isAnnotationPresent(TermField.class)) {
             TermField termField = field.getAnnotation(TermField.class);
             TermQueryBuilder termQueryBuilder = this.termQuery(field, termField);
-            this.linkQuery(boolQueryBuilder, termQueryBuilder, termField.link());
+            this.queryLink(boolQueryBuilder, termQueryBuilder, termField.link());
         }
         if (field.isAnnotationPresent(WildcardField.class)) {
             WildcardField wildcardField = field.getAnnotation(WildcardField.class);
             WildcardQueryBuilder wildcardQueryBuilder = this.wildcardQuery(field, wildcardField);
-            this.linkQuery(boolQueryBuilder, wildcardQueryBuilder, wildcardField.link());
+            this.queryLink(boolQueryBuilder, wildcardQueryBuilder, wildcardField.link());
         }
     }
 
@@ -345,10 +345,13 @@ public class NativeSearchQueryAssembly<T> {
      * @author Tiny Chiang
      * @since 1.0.0
      */
-    private void linkQuery(BoolQueryBuilder source, QueryBuilder target, Link link) {
+    private void queryLink(BoolQueryBuilder source, QueryBuilder target, Link link) {
         switch (link) {
             case MUST:
                 source.must(target);
+                break;
+            case MUST_NOT:
+                source.mustNot(target);
                 break;
             case SHOULD:
                 source.should(target);
