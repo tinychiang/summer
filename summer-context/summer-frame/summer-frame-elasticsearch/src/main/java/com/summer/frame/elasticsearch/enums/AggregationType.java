@@ -17,7 +17,7 @@ public enum AggregationType {
      */
     COUNT,
     /**
-     * 时间统计
+     * 时间柱状图
      */
     DATE_HISTOGRAM,
     /**

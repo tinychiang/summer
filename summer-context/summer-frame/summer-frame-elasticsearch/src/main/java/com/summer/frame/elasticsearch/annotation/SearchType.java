@@ -23,7 +23,7 @@ public @interface SearchType {
      *
      * @return 默认 QUERY_THEN_FETCH
      */
-    org.elasticsearch.action.search.SearchType searchType() default org.elasticsearch.action.search.SearchType.QUERY_THEN_FETCH;
+    org.elasticsearch.action.search.SearchType value() default org.elasticsearch.action.search.SearchType.QUERY_THEN_FETCH;
 
 
 }

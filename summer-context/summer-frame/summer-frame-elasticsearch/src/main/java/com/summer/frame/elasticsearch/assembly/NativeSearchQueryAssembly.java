@@ -107,7 +107,7 @@ public class NativeSearchQueryAssembly<T> {
 
     private void searchType() {
         SearchType searchType = this.clazz.getAnnotation(SearchType.class);
-        this.nativeSearchQueryBuilder.withSearchType(searchType.searchType());
+        this.nativeSearchQueryBuilder.withSearchType(searchType.value());
     }
 
     private void fetchSourceFilter() {

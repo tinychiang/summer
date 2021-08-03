@@ -14,8 +14,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @date 2021-07-23
  */
 @EnableAsync
-@SpringBootApplication
-@ComponentScan(basePackages = {"com.summer.**"})
+@SpringBootApplication(scanBasePackages = {"com.summer.**"})
 @EnableElasticsearchRepositories(basePackages = {"com.summer.cache.elasticsearch.repository"})
 public class NetflixStarter {
 
