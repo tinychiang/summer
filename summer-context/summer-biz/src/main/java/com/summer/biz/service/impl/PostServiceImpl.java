@@ -33,7 +33,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post findOne(Long id) {
         Optional<Post> postOptional = postRepository.findById(id);
-        return postOptional.orElse(null);
+        return postOptional.orElse(new Post());
     }
 
     @Override
