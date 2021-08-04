@@ -1,5 +1,6 @@
 package com.summer.starter;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,6 +15,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @date 2021-07-23
  */
 @EnableAsync
+@MapperScan(basePackages = {"com.summer.db.mapper"})
 @SpringBootApplication(scanBasePackages = {"com.summer.**"})
 @EnableElasticsearchRepositories(basePackages = {"com.summer.cache.elasticsearch.repository"})
 public class NetflixStarter {

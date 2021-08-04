@@ -32,6 +32,8 @@
         <summer.version>1.0.0</summer.version>
         <spring.cloud.version>Hoxton.SR8</spring.cloud.version>
         <spring-boot.version>2.5.2</spring-boot.version>
+        <druid.version>1.2.6</druid.version>
+        <mybatis-plus.version>3.4.1</mybatis-plus.version>
         <swagger2.version>2.9.2</swagger2.version>
         <fastjson.version>1.2.75</fastjson.version>
         <commons-lang3.version>3.9</commons-lang3.version>
