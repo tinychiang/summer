@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/summer?allowPublicKeyRetrieval=true&useUnicode=true&useSSL=false&characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1:3306/summer?useUnicode=true&useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true
     username: root
     password: tinychiang
     type: com.alibaba.druid.pool.DruidDataSource
