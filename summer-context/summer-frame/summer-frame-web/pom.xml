@@ -25,4 +25,15 @@
             <version>${summer.version}</version>
         </dependency>
     </dependencies>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.ico</include>
+                    <include>**/*.html</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 </project>
