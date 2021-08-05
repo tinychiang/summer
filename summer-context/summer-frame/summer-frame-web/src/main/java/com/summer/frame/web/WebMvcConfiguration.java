@@ -1,6 +1,11 @@
 package com.summer.frame.web;
 
+import org.springframework.boot.web.server.ConfigurableWebServerFactory;
+import org.springframework.boot.web.server.ErrorPage;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -28,4 +33,20 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
                 .allowedMethods("POST", "GET", "PUT", "DELETE")
                 .allowedOrigins("*");
     }
+
+    /**
+     * 异常页面
+     *
+     * @return {@link WebServerFactoryCustomizer}
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
+    @Bean
+    public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerFactoryCustomizer() {
+        return factory -> {
+            ErrorPage error404 = new ErrorPage(HttpStatus.NOT_FOUND, "/404.html");
+            factory.addErrorPages(error404);
+        };
+    }
+
 }
