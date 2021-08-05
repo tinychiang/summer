@@ -22,15 +22,24 @@ import java.util.List;
 public class MybatisPlusGenerator {
 
     public static void main(String[] args) {
+        // 文件位置
         String filepath = "/Users/chiang/Desktop/summer";
+        // java文件路径
+        String javaPath = "/src/main/java";
+        // mapper文件路径
+        String mapperPath = "/src/main/resources/mapper/";
+        // 作者
         String author = "Tiny Chiang";
         String driver = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://localhost:3306/summer?useUnicode=true&useSSL=false&characterEncoding=utf8";
+        String url = "jdbc:mysql://127.0.0.1:3306/summer?useUnicode=true&useSSL=false&characterEncoding=utf8";
         String username = "root";
         String password = "tinychiang";
+        // 表名称
         String[] tableNames = {"product"};
-        String moduleName = "";
+        // 包名称
         String packageName = "com.summer.db";
+        // 模块名称
+        String moduleName = "";
         // 模板引擎: freemarker
         String templatePath = "/templates/mapper.xml.ftl";
         // 模板引擎: velocity
@@ -40,7 +49,7 @@ public class MybatisPlusGenerator {
         AutoGenerator autoGenerator = new AutoGenerator();
         // 全局配置
         GlobalConfig globalConfig = new GlobalConfig();
-        globalConfig.setOutputDir(filepath.concat("/src/main/java"));
+        globalConfig.setOutputDir(filepath.concat(javaPath));
         globalConfig.setAuthor(author);
         globalConfig.setOpen(false);
         // 属性添加Swagger2注解
@@ -68,7 +77,7 @@ public class MybatisPlusGenerator {
                 @Override
                 public String outputFile(TableInfo tableInfo) {
                     // 自定义输出文件名
-                    return filepath.concat("/src/main/resources/mapper/")
+                    return filepath.concat(mapperPath)
                             .concat(packageConfig.getModuleName())
                             .concat("/")
                             .concat(tableInfo.getEntityName())
