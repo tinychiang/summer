@@ -1,9 +1,8 @@
-package com.summer.frame.web.wrap;
+package com.summer.frame.commons.wrap;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;
 
@@ -43,7 +42,7 @@ public class Wrapper<T> implements Serializable {
     }
 
     public Wrapper<T> success(T content) {
-        this.code = HttpStatus.OK.value();
+        this.code = 200;
         this.content = content;
         return this;
     }

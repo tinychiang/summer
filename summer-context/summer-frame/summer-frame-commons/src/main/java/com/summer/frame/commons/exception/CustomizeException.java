@@ -1,4 +1,4 @@
-package com.summer.frame.web.exception;
+package com.summer.frame.commons.exception;
 
 import lombok.Getter;
 

@@ -3,13 +3,13 @@ package com.summer.frame.redis.lock.annotation;
 import java.lang.annotation.*;
 
 /**
- * 锁
+ * 分布式锁
  *
  * @author Tiny Chiang
  * @version 1.0.0
  * @date 2021-08-03
  */
-@Target(value = {ElementType.TYPE, ElementType.METHOD})
+@Target(value = {ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface DistributedLock {

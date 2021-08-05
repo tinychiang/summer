@@ -1,8 +1,9 @@
-package com.summer.frame.web.wrap;
+package com.summer.frame.web.wrapper;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.summer.frame.web.exception.CustomizeException;
+import com.summer.frame.commons.exception.CustomizeException;
+import com.summer.frame.commons.wrap.Wrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
