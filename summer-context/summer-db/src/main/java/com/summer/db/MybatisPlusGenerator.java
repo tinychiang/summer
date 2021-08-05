@@ -18,11 +18,11 @@ import java.util.List;
  * @version 1.0.0
  * @date 2021-08-04
  */
+@SuppressWarnings("all")
 public class MybatisPlusGenerator {
 
     public static void main(String[] args) {
-
-        String path = "/Users/chiang/Desktop/summer";
+        String filepath = "/Users/chiang/Desktop/summer";
         String author = "Tiny Chiang";
         String driver = "com.mysql.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/summer?useUnicode=true&useSSL=false&characterEncoding=utf8";
@@ -38,10 +38,9 @@ public class MybatisPlusGenerator {
 
         // 代码生成器
         AutoGenerator autoGenerator = new AutoGenerator();
-
         // 全局配置
         GlobalConfig globalConfig = new GlobalConfig();
-        globalConfig.setOutputDir(path + "/src/main/java");
+        globalConfig.setOutputDir(filepath.concat("/src/main/java"));
         globalConfig.setAuthor(author);
         globalConfig.setOpen(false);
         // 属性添加Swagger2注解
@@ -62,13 +61,6 @@ public class MybatisPlusGenerator {
         packageConfig.setParent(packageName);
         autoGenerator.setPackageInfo(packageConfig);
 
-        // 自定义配置
-        InjectionConfig injectionConfig = new InjectionConfig() {
-            @Override
-            public void initMap() {
-            }
-        };
-
         // 自定义输出配置
         List<FileOutConfig> fileOutConfigs = new ArrayList<FileOutConfig>() {{
             // 自定义配置会被优先输出
@@ -76,7 +68,7 @@ public class MybatisPlusGenerator {
                 @Override
                 public String outputFile(TableInfo tableInfo) {
                     // 自定义输出文件名
-                    return path.concat("/src/main/resources/mapper/")
+                    return filepath.concat("/src/main/resources/mapper/")
                             .concat(packageConfig.getModuleName())
                             .concat("/")
                             .concat(tableInfo.getEntityName())
@@ -86,6 +78,12 @@ public class MybatisPlusGenerator {
             });
         }};
 
+        // 自定义配置
+        InjectionConfig injectionConfig = new InjectionConfig() {
+            @Override
+            public void initMap() {
+            }
+        };
         injectionConfig.setFileOutConfigList(fileOutConfigs);
         autoGenerator.setCfg(injectionConfig);
 
