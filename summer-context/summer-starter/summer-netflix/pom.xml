@@ -12,6 +12,10 @@
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
             <groupId>summer</groupId>
             <artifactId>summer-biz</artifactId>
             <version>${summer.version}</version>

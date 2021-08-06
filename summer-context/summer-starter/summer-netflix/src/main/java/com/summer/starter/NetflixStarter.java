@@ -3,8 +3,8 @@ package com.summer.starter;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
-import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * <p>Spring Cloud Netflix</p>
@@ -13,7 +13,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @version 1.0.0
  * @date 2021-07-23
  */
-@EnableAsync
+@EnableEurekaClient
 @MapperScan(basePackages = {"com.summer.db.mapper"})
 @SpringBootApplication(scanBasePackages = {"com.summer.**"})
 @EnableElasticsearchRepositories(basePackages = {"com.summer.cache.elasticsearch.repository"})
