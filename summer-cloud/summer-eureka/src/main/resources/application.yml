@@ -2,6 +2,8 @@ server:
   port: 8099
 eureka:
   server:
+    enableSelfPreservation: true # 防止网络不稳定剔除服务
+    renewalPercentThreshold: 0.85
     eviction-interval-timer-in-ms: 60000
   instance:
     hostname: 127.0.0.1

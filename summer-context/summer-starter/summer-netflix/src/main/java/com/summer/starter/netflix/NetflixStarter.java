@@ -1,4 +1,4 @@
-package com.summer.starter;
+package com.summer.starter.netflix;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

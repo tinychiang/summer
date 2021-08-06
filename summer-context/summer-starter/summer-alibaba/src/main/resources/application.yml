@@ -1,22 +1,6 @@
 server:
   port: 8001
 
-eureka:
-  client:
-    enabled: true
-    registerWithEureka: true
-    fetchRegistry: true
-    registry-fetch-interval-seconds: 30
-    serviceUrl:
-      defaultZone: http://eureka:eureka@127.0.0.1:8099/eureka
-    healthcheck:
-      enabled: true
-  instance:
-    prefer-ip-address: true
-    instance-id: ${spring.application.name}
-    leaseRenewalIntervalInSeconds: 30 # 服务续约间隔时间
-    leaseExpirationDurationInSeconds: 90 # 服务失效时间
-
 spring:
   application:
     name: summer-netflix
