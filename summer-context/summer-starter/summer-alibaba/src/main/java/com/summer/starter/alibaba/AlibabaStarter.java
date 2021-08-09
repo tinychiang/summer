@@ -3,6 +3,7 @@ package com.summer.starter.alibaba;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 /**
@@ -12,6 +13,7 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
  * @version 1.0.0
  * @date 2021-07-23
  */
+@EnableDiscoveryClient
 @MapperScan(basePackages = {"com.summer.db.mapper"})
 @SpringBootApplication(scanBasePackages = {"com.summer.**"})
 @EnableElasticsearchRepositories(basePackages = {"com.summer.cache.elasticsearch.repository"})

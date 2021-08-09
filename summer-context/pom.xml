@@ -30,7 +30,7 @@
     </modules>
     <properties>
         <summer.version>1.0.0</summer.version>
-        <spring.cloud.version>Hoxton.SR8</spring.cloud.version>
+        <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
         <spring-boot.version>2.5.2</spring-boot.version>
         <druid.version>1.2.6</druid.version>
         <mybatis-plus.version>3.4.1</mybatis-plus.version>
@@ -77,7 +77,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring.cloud.version}</version>
+                <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

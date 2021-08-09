@@ -3,7 +3,13 @@ server:
 
 spring:
   application:
-    name: summer-netflix
+    name: summer-alibaba
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848 # 配置中心地址
+        file-extension: yml # 默认 .properties
+  # ↓ ↓ ↓ ↓ ↓ ↓ ↓ 放入nacos中 ↓ ↓ ↓ ↓ ↓ ↓ ↓
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/summer?useUnicode=true&useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true
     username: root
