@@ -1,4 +1,4 @@
-package com.summer.frame.commons.wrappper;
+package com.summer.frame.commons.wrapper;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

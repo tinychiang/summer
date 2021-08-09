@@ -12,10 +12,6 @@
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
             <groupId>summer</groupId>
             <artifactId>summer-frame-commons</artifactId>
             <version>${summer.version}</version>
