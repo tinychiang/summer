@@ -1,4 +1,4 @@
-package com.summer.cache.elasticsearch.dto;
+package com.summer.db.elasticsearch.dto;
 
 import com.summer.frame.elasticsearch.AbstractPageHelper;
 import com.summer.frame.elasticsearch.annotation.Document;

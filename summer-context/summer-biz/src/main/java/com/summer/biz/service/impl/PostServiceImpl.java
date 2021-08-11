@@ -1,10 +1,10 @@
 package com.summer.biz.service.impl;
 
 import com.summer.biz.service.PostService;
-import com.summer.cache.elasticsearch.document.Post;
-import com.summer.cache.elasticsearch.dto.PostDTO;
-import com.summer.cache.elasticsearch.repository.PostRepository;
-import com.summer.cache.elasticsearch.vo.PostVO;
+import com.summer.db.elasticsearch.document.Post;
+import com.summer.db.elasticsearch.dto.PostDTO;
+import com.summer.db.elasticsearch.repository.PostRepository;
+import com.summer.db.elasticsearch.vo.PostVO;
 import com.summer.frame.elasticsearch.ElasticsearchAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.SearchHit;

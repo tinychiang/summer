@@ -1,4 +1,4 @@
-package com.summer.db.dto;
+package com.summer.db.mysql.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

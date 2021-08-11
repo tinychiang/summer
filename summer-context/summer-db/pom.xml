@@ -40,5 +40,15 @@
             <artifactId>freemarker</artifactId>
             <version>${freemarker.version}</version>
         </dependency>
+        <dependency>
+            <groupId>summer</groupId>
+            <artifactId>summer-frame-elasticsearch</artifactId>
+            <version>${summer.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>summer</groupId>
+            <artifactId>summer-frame-redis</artifactId>
+            <version>${summer.version}</version>
+        </dependency>
     </dependencies>
 </project>

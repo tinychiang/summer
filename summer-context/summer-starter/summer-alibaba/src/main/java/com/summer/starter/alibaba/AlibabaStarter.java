@@ -14,9 +14,9 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
  * @date 2021-07-23
  */
 @EnableDiscoveryClient
-@MapperScan(basePackages = {"com.summer.db.mapper"})
+@MapperScan(basePackages = {"com.summer.db.mysql.mapper"})
 @SpringBootApplication(scanBasePackages = {"com.summer.**"})
-@EnableElasticsearchRepositories(basePackages = {"com.summer.cache.elasticsearch.repository"})
+@EnableElasticsearchRepositories(basePackages = {"com.summer.db.elasticsearch.repository"})
 public class AlibabaStarter {
 
     public static void main(String[] args) {

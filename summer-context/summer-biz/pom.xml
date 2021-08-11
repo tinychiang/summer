@@ -23,11 +23,6 @@
         </dependency>
         <dependency>
             <groupId>summer</groupId>
-            <artifactId>summer-cache</artifactId>
-            <version>${summer.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>summer</groupId>
             <artifactId>summer-db</artifactId>
             <version>${summer.version}</version>
         </dependency>

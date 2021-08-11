@@ -1,11 +1,10 @@
 package com.summer.frame.redis;
 
 import com.summer.frame.commons.AbstractCurrentHolder;
-import org.apache.commons.lang3.ObjectUtils;
+import com.summer.frame.commons.exception.CustomizeException;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -19,24 +18,24 @@ import java.util.Objects;
  * @version 1.0.0
  * @date 2021-08-09
  */
-@Component
-public class RedisCurrentHolder extends AbstractCurrentHolder {
+public class RedisCurrentHolder<T> extends AbstractCurrentHolder<T> {
 
     private final RedisTemplate<String, Object> redisTemplate;
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> T currentUser(Class<T> clazz) {
+    public T currentUser() {
         HttpServletRequest httpServletRequest = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
         String token = httpServletRequest.getHeader(TOKEN);
         if (StringUtils.isNotEmpty(token)) {
             Object object = redisTemplate.boundValueOps(token).get();
-            return ObjectUtils.defaultIfNull((T) object, null);
+            if (object != null) {
+                return (T) object;
+            }
         }
-        return null;
+        throw new CustomizeException(HttpStatus.FORBIDDEN.value(), HttpStatus.FORBIDDEN.getReasonPhrase());
     }
 
-    @Autowired
     public RedisCurrentHolder(RedisTemplate<String, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }

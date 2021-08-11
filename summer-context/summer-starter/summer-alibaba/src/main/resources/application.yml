@@ -65,7 +65,7 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
-  type-aliases-package: com.summer.db.entity
+  type-aliases-package: com.summer.db.mysql.entity
   check-config-location: true
   configuration:
     cache-enabled: false

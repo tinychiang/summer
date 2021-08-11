@@ -1,6 +1,6 @@
-package com.summer.cache.elasticsearch.repository;
+package com.summer.db.elasticsearch.repository;
 
-import com.summer.cache.elasticsearch.document.Post;
+import com.summer.db.elasticsearch.document.Post;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 /**

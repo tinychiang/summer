@@ -1,7 +1,7 @@
-package com.summer.db.mapper;
+package com.summer.db.mysql.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.summer.db.entity.Product;
+import com.summer.db.mysql.entity.Product;
 
 /**
  * 产品信息 Mapper

@@ -1,9 +1,8 @@
 package com.summer.biz.service;
 
-import com.summer.cache.elasticsearch.document.Post;
-import com.summer.cache.elasticsearch.dto.PostDTO;
-import com.summer.cache.elasticsearch.vo.PostVO;
-import org.springframework.data.elasticsearch.core.SearchHits;
+import com.summer.db.elasticsearch.document.Post;
+import com.summer.db.elasticsearch.dto.PostDTO;
+import com.summer.db.elasticsearch.vo.PostVO;
 
 import java.util.List;
 

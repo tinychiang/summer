@@ -1,4 +1,4 @@
-package com.summer.db.vo;
+package com.summer.db.mysql.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

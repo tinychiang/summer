@@ -1,4 +1,4 @@
-package com.summer.db.entity;
+package com.summer.db.mysql.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;

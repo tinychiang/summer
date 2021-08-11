@@ -17,6 +17,14 @@ eureka:
     leaseRenewalIntervalInSeconds: 30 # 服务续约间隔时间
     leaseExpirationDurationInSeconds: 90 # 服务失效时间
 
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000 # 连接超时时间
+        readTimeout: 5000   # 读超时时间
+        loggerLevel: full # 日志级别
+
 spring:
   application:
     name: summer-netflix
@@ -75,7 +83,7 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
-  type-aliases-package: com.summer.db.entity
+  type-aliases-package: com.summer.db.mysql.entity
   check-config-location: true
   configuration:
     cache-enabled: false

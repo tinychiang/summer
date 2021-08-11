@@ -1,4 +1,4 @@
-package com.summer.db;
+package com.summer.db.mysql;
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
@@ -37,7 +37,7 @@ public class MybatisPlusGenerator {
         // 表名称
         String[] tableNames = {"product"};
         // 包名称
-        String packageName = "com.summer.db";
+        String packageName = "com.summer.db.mysql";
         // 模块名称
         String moduleName = "";
         // 模板引擎: freemarker

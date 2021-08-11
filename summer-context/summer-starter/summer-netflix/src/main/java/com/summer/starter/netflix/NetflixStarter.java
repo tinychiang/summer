@@ -3,7 +3,8 @@ package com.summer.starter.netflix;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 /**
@@ -13,10 +14,11 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
  * @version 1.0.0
  * @date 2021-07-23
  */
-@EnableEurekaClient
-@MapperScan(basePackages = {"com.summer.db.mapper"})
+@EnableDiscoveryClient
+@EnableFeignClients
+@MapperScan(basePackages = {"com.summer.db.mysql.mapper"})
 @SpringBootApplication(scanBasePackages = {"com.summer.**"})
-@EnableElasticsearchRepositories(basePackages = {"com.summer.cache.elasticsearch.repository"})
+@EnableElasticsearchRepositories(basePackages = {"com.summer.db.elasticsearch.repository"})
 public class NetflixStarter {
 
     public static void main(String[] args) {

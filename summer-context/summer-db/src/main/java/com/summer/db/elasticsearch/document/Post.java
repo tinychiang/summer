@@ -1,4 +1,4 @@
-package com.summer.cache.elasticsearch.document;
+package com.summer.db.elasticsearch.document;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
