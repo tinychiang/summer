@@ -35,7 +35,7 @@ Java Mesh Service - 技术与业务充分解耦网格服务架构，并尽最大
 - RestAPI<br/>
   `Swagger 2.X`
 - 部署&运维<br/>
-  `Docker` `Arthas` `Prometheus`
+  `Docker` `Jenkins` `Arthas` `Prometheus`
 
 ## 3. 项目结构
 
