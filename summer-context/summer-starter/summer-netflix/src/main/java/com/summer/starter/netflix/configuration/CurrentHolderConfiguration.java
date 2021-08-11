@@ -1,7 +1,6 @@
-package com.summer.starter.netflix.config;
+package com.summer.starter.netflix.configuration;
 
 import com.summer.frame.commons.AbstractCurrentHolder;
-import com.summer.frame.commons.AbstractCurrentUser;
 import com.summer.frame.redis.RedisCurrentHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class CurrentHolderConfiguration {
 
     @Bean
-    public AbstractCurrentHolder<AbstractCurrentUser> abstractCurrentHolder(@Autowired RedisTemplate<String, Object> redisTemplate) {
+    public AbstractCurrentHolder<AbstractCurrentHolder.User> abstractCurrentHolder(@Autowired RedisTemplate<String, Object> redisTemplate) {
         return new RedisCurrentHolder<>(redisTemplate);
     }
 
