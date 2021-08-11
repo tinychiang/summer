@@ -7,7 +7,7 @@ Java Mesh Service - 技术与业务充分解耦网格服务架构，并尽最大
 ## 2. 技术栈
 
 - 基础
-  `Spring Boot` `Swagger 2`
+  `Spring Cloud Hoxton.SR8` `Spring Cloud Alibaba 2.X` `Spring Boot 2.X`
 - 网关&代理
   `Gateway` `Zuul` `Nginx`
 - 配置中心  
@@ -21,9 +21,9 @@ Java Mesh Service - 技术与业务充分解耦网格服务架构，并尽最大
 - 搜索引擎
   `Elasticsearch 7` `Solr`
 - 存储
-  `MySQL` `Postgre`
+  `MySQL 8` `Postgre`
 - 缓存
-  `Redis` `Memcached`
+  `Redis 6` `Memcached`
 - 消息中间件
   `RocketMQ` `Kafka` `RabitMQ`
 - 文件存储
@@ -32,6 +32,8 @@ Java Mesh Service - 技术与业务充分解耦网格服务架构，并尽最大
   `Durid` `Spring Data JDBC` `Mybatis-plus` `Spring Data JPA`
 - 定时任务
   `xxl-job` `Spring Batch`
+- RestAPI
+  `Swagger 2`
 - 部署&运维
   `Docker` `Arthas` `Prometheus`
 
