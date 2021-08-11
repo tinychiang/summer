@@ -8,7 +8,7 @@ Java Mesh Service - 技术与业务充分解耦网格服务架构，并尽最大
 
 `Spring-Cloud-Netflix-Eureka` `Spring-Cloud-Netflix-Feign` `Spring-Cloud-Netflix-Gateway` `Spring-Cloud-Netflix-Zuul` `Consul` `Apollo` `Springboot` `Elasticsearch` `Redis` `MongoDB` `Zookeeper` `RocketMQ` `Kafka` `RabitMQ` `MySQL` `Durid` `Mybatis-plus` `Xxl-job` `Spring-Cloud-alibaba-Nacos` `Dubbo` `Spring-Cloud-alibaba-Sentinel` `Go-fastdfs` `Swagger` `Arthas` `Nginx` `Docker`
 
-## 3.结构
+## 3.项目结构
 
 ```shell
 .
