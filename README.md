@@ -19,7 +19,7 @@ Java Mesh Service - 技术与业务充分解耦网格服务架构，并尽最大
 - 熔断器
   `Sentinel`
 - 搜索引擎
-  `Elasticsearch` `Solr`
+  `Elasticsearch7` `Solr`
 - 存储
   `MySQL` `Postgre`
 - 缓存
