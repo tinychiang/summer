@@ -1,8 +1,9 @@
 # summer
 
+`Java` `Mesh Service`
+
 ## 1. 介绍
 
-`Java` `Mesh Service`<br/>
 技术与业务充分解耦网格服务架构，并尽最大可能集成所有微服务技术栈。
 
 ## 2. 技术栈
