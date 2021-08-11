@@ -6,7 +6,7 @@ Java Mesh Service - 技术与业务充分解耦网格服务架构，并尽最大
 
 ## 2. 技术栈
 
-- 基础<br/>
+- 核心<br/>
   `Spring Cloud Hoxton.SR8` `Spring Cloud Alibaba 2.X` `Spring Boot 2.X`
 - 网关&代理<br/>
   `Gateway` `Zuul` `Nginx`
