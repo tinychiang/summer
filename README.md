@@ -61,5 +61,5 @@ Java Mesh Service - 技术与业务充分解耦网格服务架构，并尽最大
 │   └── summer-starter  # 启动入口
 │       ├── summer-alibaba  # Spring Cloud Alibaba
 │       ├── summer-netflix  # Spring Cloud Netflix
-└── summer-ui     # 前端
+└── summer-ui       # 前端
 ```
