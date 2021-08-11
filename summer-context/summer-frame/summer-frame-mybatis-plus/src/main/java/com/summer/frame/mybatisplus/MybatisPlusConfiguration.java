@@ -1,4 +1,4 @@
-package com.summer.db.mysql;
+package com.summer.frame.mybatisplus;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;

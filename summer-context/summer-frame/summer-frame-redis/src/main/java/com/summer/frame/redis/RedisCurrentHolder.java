@@ -1,6 +1,7 @@
 package com.summer.frame.redis;
 
 import com.summer.frame.commons.AbstractCurrentHolder;
+import com.summer.frame.commons.AbstractCurrentUser;
 import com.summer.frame.commons.exception.CustomizeException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -18,7 +19,7 @@ import java.util.Objects;
  * @version 1.0.0
  * @date 2021-08-09
  */
-public class RedisCurrentHolder<T> extends AbstractCurrentHolder<T> {
+public class RedisCurrentHolder<T extends AbstractCurrentUser> extends AbstractCurrentHolder<T> {
 
     private final RedisTemplate<String, Object> redisTemplate;
 

@@ -13,6 +13,7 @@
     <modules>
         <module>summer-frame-commons</module>
         <module>summer-frame-elasticsearch</module>
+        <module>summer-frame-mybatis-plus</module>
         <module>summer-frame-redis</module>
         <module>summer-frame-web</module>
     </modules>

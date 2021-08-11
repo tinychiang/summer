@@ -8,7 +8,7 @@ package com.summer.frame.commons;
  * @version 1.0.0
  * @date 2021-08-09
  */
-public abstract class AbstractCurrentHolder<T> {
+public abstract class AbstractCurrentHolder<T extends AbstractCurrentUser> {
 
     protected static final String TOKEN = "token";
 

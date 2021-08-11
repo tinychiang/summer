@@ -1,4 +1,4 @@
-package com.summer.db.mysql;
+package com.summer.frame.mybatisplus;
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
