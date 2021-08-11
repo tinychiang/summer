@@ -19,11 +19,11 @@ Java Mesh Service - 技术与业务充分解耦网格服务架构，并尽最大
 - 熔断器
   `Sentinel`
 - 搜索引擎
-  `Elasticsearch 7` `Solr`
+  `Elasticsearch 7.X` `Solr`
 - 存储
   `MySQL 8` `Postgre`
 - 缓存
-  `Redis 6` `Memcached`
+  `Redis 6.X` `Memcached`
 - 消息中间件
   `RocketMQ` `Kafka` `RabitMQ`
 - 文件存储
@@ -33,7 +33,7 @@ Java Mesh Service - 技术与业务充分解耦网格服务架构，并尽最大
 - 定时任务
   `xxl-job` `Spring Batch`
 - RestAPI
-  `Swagger 2`
+  `Swagger 2.X`
 - 部署&运维
   `Docker` `Arthas` `Prometheus`
 
