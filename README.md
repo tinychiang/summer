@@ -7,7 +7,7 @@ Java Mesh Service - 技术与业务充分解耦网格服务架构，并尽最大
 ## 2. 技术栈
 
 - 基础
-  `Springboot` `Swagger2`
+  `Spring Boot` `Swagger2`
 - 网关&代理
   `Gateway` `Zuul` `Nginx`
 - 配置中心  
