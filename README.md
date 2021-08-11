@@ -6,7 +6,34 @@ Java Mesh Service - 技术与业务充分解耦网格服务架构，并尽最大
 
 ## 2. 技术栈
 
-`Spring-Cloud-Netflix-Eureka` `Spring-Cloud-Netflix-Feign` `Spring-Cloud-Netflix-Gateway` `Spring-Cloud-Netflix-Zuul` `Consul` `Apollo` `Springboot` `Elasticsearch` `Redis` `MongoDB` `Zookeeper` `RocketMQ` `Kafka` `RabitMQ` `MySQL` `Durid` `Mybatis-plus` `Xxl-job` `Spring-Cloud-alibaba-Nacos` `Dubbo` `Spring-Cloud-alibaba-Sentinel` `Go-fastdfs` `Swagger` `Arthas` `Nginx` `Docker`
+- 基础
+  `Springboot` `Swagger2`
+- 网关&代理
+  `Gateway` `Zuul` `Nginx`
+- 配置中心  
+  `Apollo`
+- 注册中心
+  `Eureka` `Nacos` `Consul` `Zookeeper`
+- RPC
+  `Feign` `Dubbo`
+- 熔断器
+  `Sentinel`
+- 搜索引擎
+  `Elasticsearch` `Solr`
+- 存储
+  `MySQL` `Postgre`
+- 缓存
+  `Redis` `Memcached`
+- 消息中间件
+  `RocketMQ` `Kafka` `RabitMQ`
+- 文件存储
+  `MongoDB` `Go-fastdfs` `CEPH`
+- DB连接池&SQL处理
+  `Durid` `Spring Data JDBC` `Mybatis-plus` `Spring Data JPA`
+- 定时任务
+  `xxl-job` `Spring Batch`
+- 部署&运维
+  `Docker` `Arthas` `Prometheus`
 
 ## 3. 项目结构
 
