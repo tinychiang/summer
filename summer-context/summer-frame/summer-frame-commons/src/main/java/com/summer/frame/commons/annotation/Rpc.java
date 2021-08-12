@@ -3,7 +3,7 @@ package com.summer.frame.commons.annotation;
 import java.lang.annotation.*;
 
 /**
- * RPC Provider
+ * RPC
  *
  * @author Tiny Chiang
  * @version 1.0.0
@@ -12,5 +12,8 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface Provider {
+public @interface Rpc {
+
+    String name();
+
 }

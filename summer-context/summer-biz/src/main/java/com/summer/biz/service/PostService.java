@@ -7,7 +7,7 @@ import com.summer.db.elasticsearch.vo.PostVO;
 import java.util.List;
 
 /**
- * <p>贴文 - 业务接口</p>
+ * 贴文 - 业务接口
  *
  * @author Tiny Chiang
  * @version 1.0.0

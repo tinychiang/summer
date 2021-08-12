@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * <p>贴文 - 控制器</p>
+ * 贴文 - 控制器
  *
  * @author Tiny Chiang
  * @version 1.0.0
