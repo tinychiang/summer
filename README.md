@@ -19,7 +19,7 @@
 - RPC<br/>
   `Feign` `Dubbo`
 - 熔断器<br/>
-  `Sentinel` `Hystrix`
+  `Hystrix` `Sentinel`
 - 搜索引擎<br/>
   `Elasticsearch 7.X` `Solr`
 - 存储<br/>
