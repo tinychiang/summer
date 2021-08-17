@@ -78,11 +78,11 @@
 
 ### 4.2. summer-frame-web
 
-&emsp;&emsp;涉及Java Web的封装。例如：跨域访问、异常捕获处理、接口统一风格、接口说明等。
+&emsp;&emsp;`Java Web` 配置与封装。例如：跨域访问、异常捕获处理、接口统一风格、接口说明等。
 
 ### 4.3. summer-frame-elasticsearch
 
-&emsp;&emsp;Elasticsearch 7.X版本封装，自定义注解实现：复合条件检索、聚合函数查询等。
+&emsp;&emsp;`Elasticsearch 7.X` 版本封装。通过自定义注解实现：复合条件检索、聚合函数查询等。
 > Elasticsearch原生说明请参考
 > - https://www.yuque.com/tinychiang/cloud/supqt8
 > - https://www.yuque.com/tinychiang/cloud/tsbadq
@@ -90,11 +90,11 @@
 
 ### 4.4. summer-frame-mybatis-plus
 
-&emsp;&emsp;Mybatis-Plus配置与封装。例如：代码生成器等。
+&emsp;&emsp;`Mybatis-Plus` 配置与封装。例如：代码生成器等。
 
 ### 4.5. summer-frame-redis
 
-&emsp;&emsp;Redis配置与封装。实现：分布式锁、Session会话管理等。
+&emsp;&emsp;`Redis` 配置与封装。实现：分布式锁、Session会话管理等。
 
 ## 5. summer-starter
 
@@ -102,8 +102,8 @@
 
 ### 5.1. summer-starter-alibaba
 
-&emsp;&emsp;基于spring cloud alibaba技术栈启动入口。
+&emsp;&emsp;基于 `spring cloud alibaba` 技术栈启动入口。
 
 ### 5.2. summer-starter-netflix
 
-&emsp;&emsp;基于spring cloud netflix技术栈启动入口。
+&emsp;&emsp;基于 `spring cloud netflix` 技术栈启动入口。
