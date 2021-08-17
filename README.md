@@ -46,8 +46,8 @@
 ```shell
 .
 ├── summer-cloud    # Cloud 服务依赖
-│   ├── summer-eureka   # Eureka Server 注册中心
-│   └── summer-gateway  # Spring Cloud Gateway 网关
+│   ├── summer-cloud-eureka   # Eureka Server 注册中心
+│   └── summer-cloud-gateway  # Spring Cloud Gateway 网关
 ├── summer-context  # 服务主体
 │   ├── summer-api      # RPC API 接口
 │   ├── summer-biz      # 业务逻辑
@@ -63,8 +63,8 @@
 │   │   ├── summer-queue-rabbit # rabbit 配置与封装
 │   │   ├── summer-queue-rocket # rocket 配置与封装
 │   └── summer-starter  # 启动入口
-│       ├── summer-alibaba  # Spring Cloud Alibaba
-│       ├── summer-netflix  # Spring Cloud Netflix
+│       ├── summer-starter-alibaba  # Spring Cloud Alibaba
+│       ├── summer-starter-netflix  # Spring Cloud Netflix
 └── summer-ui       # 前端
 ```
 
@@ -82,6 +82,6 @@
 
 ## 5. summer-starter
 
-### 5.1. summer-alibaba
+### 5.1. summer-starter-alibaba
 
-### 5.2. summer-netflix
+### 5.2. summer-starter-netflix
