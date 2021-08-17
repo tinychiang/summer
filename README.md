@@ -38,7 +38,7 @@
   `Swagger 2.X`
 - 部署&运维<br/>
   `Docker` `Jenkins` `Arthas` `Prometheus`
-- ui<br/>
+- 前端<br/>
   `Vue 3.X` `Element-Plus`
 
 ## 3. 项目结构
