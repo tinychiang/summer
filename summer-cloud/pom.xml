@@ -8,8 +8,8 @@
     <version>1.0.0</version>
     <packaging>pom</packaging>
     <modules>
-        <module>summer-eureka</module>
-        <module>summer-gateway</module>
+        <module>summer-cloud-eureka</module>
+        <module>summer-cloud-gateway</module>
     </modules>
     <properties>
         <spring.cloud.version>Hoxton.SR8</spring.cloud.version>

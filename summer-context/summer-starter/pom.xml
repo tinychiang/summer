@@ -11,7 +11,7 @@
     <artifactId>summer-starter</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>summer-netflix</module>
-        <module>summer-alibaba</module>
+        <module>summer-starter-alibaba</module>
+        <module>summer-starter-netflix</module>
     </modules>
 </project>

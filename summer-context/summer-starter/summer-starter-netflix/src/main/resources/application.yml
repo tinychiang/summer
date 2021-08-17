@@ -27,7 +27,7 @@ feign:
 
 spring:
   application:
-    name: summer-netflix
+    name: summer-starter-netflix
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/summer?useUnicode=true&useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true
     username: root
