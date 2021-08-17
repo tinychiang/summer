@@ -4,7 +4,7 @@
 
 ## 1. 介绍
 
-技术与业务充分解耦的网格服务架构，并尽最大可能集成所有微服务技术栈。
+&emsp;&emsp;技术与业务充分解耦的网格服务架构，并尽最大可能集成所有微服务技术栈。
 
 ## 2. 技术栈
 
@@ -70,18 +70,40 @@
 
 ## 4. summer-frame
 
+&emsp;&emsp;技术架构封装，实现技术与业务充分解耦，建议该文件夹下文件单独设立分支，屏蔽业务功能代码的可见性。
+
 ### 4.1. summer-frame-commons
+
+&emsp;&emsp;框架说明性封装，只声明不实现。例如：注解、接口、异常、出/如参封装等。
 
 ### 4.2. summer-frame-web
 
+&emsp;&emsp;涉及Java Web的封装。例如：跨域访问、异常捕获处理、接口统一风格、接口说明等。
+
 ### 4.3. summer-frame-elasticsearch
+
+&emsp;&emsp;Elasticsearch 7.X版本封装，自定义注解实现：复合条件检索、聚合函数查询等。
+> Elasticsearch原生说明请参考
+> - https://www.yuque.com/tinychiang/cloud/supqt8
+> - https://www.yuque.com/tinychiang/cloud/tsbadq
+> - https://www.yuque.com/tinychiang/cloud/liaqss
 
 ### 4.4. summer-frame-mybatis-plus
 
+&emsp;&emsp;Mybatis-Plus配置与封装。例如：代码生成器等。
+
 ### 4.5. summer-frame-redis
+
+&emsp;&emsp;Redis配置与封装。实现：分布式锁、Session会话管理等。
 
 ## 5. summer-starter
 
+&emsp;&emsp;服务启动入口。
+
 ### 5.1. summer-starter-alibaba
 
+&emsp;&emsp;基于spring cloud alibaba技术栈启动入口。
+
 ### 5.2. summer-starter-netflix
+
+&emsp;&emsp;基于spring cloud netflix技术栈启动入口。
