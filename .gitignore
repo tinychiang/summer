@@ -1,7 +1,10 @@
-# IntelliJ IDEA
 .DS_Store
+
+# IntelliJ IDEA
 .idea
 *.iml
+
+# Maven
 target
 
 # Compiled class file
@@ -28,15 +31,11 @@ target
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-# vue
-node_modules/
-/dist/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-/test/unit/coverage/
-/test/e2e/reports/
-selenium-debug.log
+# Webpack
+node_modules
+dist
+dist-ssr
+*.local
 
 # Editor directories and files
 .vscode
