@@ -1,6 +1,7 @@
 import { createApp } from "vue";
-import ElementPlus from "element-plus";
-import "element-plus/lib/theme-chalk/index.css";
+import router from "./router";
+import elementPlus from "element-plus";
 import App from "./App.vue";
+import "element-plus/lib/theme-chalk/index.css";
 
-createApp(App).use(ElementPlus).mount("#app");
+createApp(App).use(router).use(elementPlus).mount("#app");

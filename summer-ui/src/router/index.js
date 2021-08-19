@@ -1,15 +1,31 @@
-import Vue from "vue";
-import Router from "vue-router";
-import HelloWorld from "@/components/HelloWorld";
+import { createRouter, createWebHistory } from "vue-router";
 
-Vue.use(Router);
+const routes = [
+  {
+    path: "/",
+    name: "index",
+    component: () => import("../components/index/index.vue"),
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("../components/login/login.vue"),
+  },
+];
 
-export default new Router({
-  routes: [
-    {
-      path: "/",
-      name: "HelloWorld",
-      component: HelloWorld,
-    },
-  ],
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
 });
+
+const authorization = false;
+
+router.beforeEach((to, from, next) => {
+  if (to.name != "login" && !authorization) {
+    next({ name: "login" });
+  } else {
+    next();
+  }
+});
+
+export default router;
