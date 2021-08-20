@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import store from "../store";
+import store from "@/store";
 
 /**
  * 路由跳转配置
@@ -17,7 +17,12 @@ const routes = [
   {
     path: "/dashboard",
     name: "dashboard",
-    component: () => import("../components/dashboard/dashboard.vue"),
+    component: () => import("../components/modules/dashboard/dashboard.vue"),
+  },
+  {
+    path: "/user",
+    name: "user",
+    component: () => import("../components/modules/user/user.vue"),
   },
 ];
 
