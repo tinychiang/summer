@@ -1,17 +1,17 @@
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
-import styleImport from "vite-plugin-style-import";
-import path from "path";
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import styleImport from 'vite-plugin-style-import';
+import path from 'path';
 
 export default defineConfig({
   server: {
-    port: "8000",
+    port: '8000',
     open: true,
     cors: true,
     // 代理规则
     proxy: {
-      "/api": {
-        target: "http://127.0.0.1:8080",
+      '/api': {
+        target: 'http://127.0.0.1:8080',
         changeOrigin: true,
         secure: false,
       },
@@ -19,8 +19,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"),
-      "@@": path.resolve(__dirname, "src/components"),
+      '@': path.resolve(__dirname, 'src')
     },
   },
   plugins: [
@@ -28,7 +27,7 @@ export default defineConfig({
     styleImport({
       libs: [
         {
-          libraryName: "element-plus",
+          libraryName: 'element-plus',
           esModule: true,
           ensureStyleFile: true,
           resolveStyle: (name) => {
@@ -40,7 +39,7 @@ export default defineConfig({
           },
         },
         {
-          libraryName: "element-plus",
+          libraryName: 'element-plus',
           esModule: true,
           ensureStyleFile: true,
           resolveStyle: (name) => {

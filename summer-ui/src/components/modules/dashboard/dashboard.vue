@@ -5,7 +5,7 @@
 </template>
 <script>
 import { defineComponent, ref } from "vue";
-import store from "@/store";
+import store from "@/configurations/store";
 
 export default defineComponent({
   setup() {

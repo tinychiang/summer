@@ -2,24 +2,13 @@
   <div class="backgroud">
     <el-row class="box">
       <el-col :span="24">
-        <el-input
-          v-model="username"
-          prefix-icon="el-icon-user"
-          placeholder="请输入账号..."
-        />
+        <el-input v-model="username" prefix-icon="el-icon-user" placeholder="请输入账号..." />
       </el-col>
       <el-col :span="24" class="margin-top">
-        <el-input
-          v-model="password"
-          prefix-icon="el-icon-lock"
-          placeholder="请输入密码..."
-          show-password
-        />
+        <el-input v-model="password" prefix-icon="el-icon-lock" placeholder="请输入密码..." show-password />
       </el-col>
       <el-col :span="24" class="margin-top">
-        <el-button class="button" type="primary" @click="login"
-          >登&emsp;录</el-button
-        >
+        <el-button class="button" type="primary" @click="login">登&emsp;录</el-button>
       </el-col>
     </el-row>
   </div>
@@ -29,11 +18,9 @@ import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   setup() {
-    const username = ref("");
-    const password = ref("");
     return {
-      username,
-      password,
+      username: ref(""),
+      password: ref(""),
     };
   },
   methods: {

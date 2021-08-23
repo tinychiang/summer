@@ -1,5 +1,5 @@
-import axios from "axios";
-import store from "@/store";
+import axios from 'axios';
+import store from '@/configurations/store';
 
 /**
  * axios配置
@@ -11,7 +11,7 @@ const instance = axios.create({
   timeout: 6000,
   // 请求头
   headers: {
-    "Content-Type": "application/json;charset=UTF-8;",
+    'Content-Type': 'application/json;charset=UTF-8;',
   },
 });
 
@@ -22,7 +22,7 @@ instance.interceptors.request.use(
   (config) => {
     const token = store.state.token;
     token && (config.headers.token = token);
-    if (config.method === "POST") {
+    if (config.method === 'POST') {
       config.data = JSON.stringify(config.data);
     }
     return config;

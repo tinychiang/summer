@@ -1,11 +1,11 @@
-import Vuex from "vuex";
+import Vuex from 'vuex';
 
 /**
  * Web Storage
  */
 export default new Vuex.Store({
   state: {
-    token: localStorage.getItem("token"),
+    token: localStorage.getItem('token'),
   },
   mutations: {
     /**
@@ -15,7 +15,7 @@ export default new Vuex.Store({
      */
     change(state, token) {
       state.token = token;
-      localStorage.setItem("token", token);
+      localStorage.setItem('token', token);
     },
     /**
      * 删除token
@@ -23,7 +23,7 @@ export default new Vuex.Store({
      */
     remove(state) {
       state.token = null;
-      localStorage.removeItem("token");
+      localStorage.removeItem('token');
     },
   },
 });
