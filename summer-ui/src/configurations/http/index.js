@@ -1,5 +1,6 @@
 import axios from 'axios';
-import store from '@/configurations/store';
+import { ElMessage } from 'element-plus';
+import store from '~@/store';
 
 /**
  * axios配置
@@ -34,8 +35,49 @@ instance.interceptors.request.use(
  * 响应拦截器
  */
 instance.interceptors.response.use(
-  (response) => response.data,
+  (response) => {
+    if (response.status != 200 && valid(response.data)) {
+      throw new Error(response);
+    }
+    return handle(response.data);
+  },
   (error) => Promise.reject(error)
 );
+
+/**
+ * 响应参数格式检验
+ * @param {*} object response.data
+ * @returns true: 满足, false: 不满足
+ */
+const valid = (object) => {
+  if (!object.code || !object.message || !object.data) {
+    console.error('data struct is not match');
+    return false;
+  }
+  return true;
+};
+
+/**
+ * 出参业务判定处理
+ * @param {*} object response.data
+ * @returns
+ * 200: object.data
+ * 401: 移除登录信息
+ * 其他: 弹出异常
+ */
+const handle = (object) => {
+  if (code === '200') {
+    return object.data;
+  } else if (object.code === '401') {
+    store.commit('remove');
+    console.warn('token invalid');
+  } else {
+    ElMessage({
+      type: 'error',
+      showClose: true,
+      message: '[' + object.code + ']' + ' ' + object.message,
+    });
+  }
+};
 
 export default instance;

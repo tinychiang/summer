@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import store from '@/configurations/store';
+import store from '~@/store';
 
 /**
  * 路由文件加载

@@ -1,8 +1,7 @@
 /**
- * 组件路由配置
- * name      组件名称, 全局唯一
- * path      访问路径
- * component 组件位置
+ * 根路径路由
+ * path     路径
+ * redirect 重定向路径
  */
 const route = {
   path: '/',
