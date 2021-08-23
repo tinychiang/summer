@@ -2,32 +2,16 @@ import { createRouter, createWebHistory } from 'vue-router';
 import store from '@/configurations/store';
 
 /**
- * 路由跳转配置
+ * 路由文件加载
  */
-const routes = [
-  {
-    path: '/',
-    redirect: '/dashboard',
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/components/login.vue'),
-  },
-  {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: () => import('@/components/modules/dashboard/dashboard.vue'),
-  },
-  {
-    path: '/user',
-    name: 'user',
-    component: () => import('@/components/modules/user/user.vue'),
-  },
-];
+const files = import.meta.globEager('/src/components/modules/**/*.router.js');
+/**
+ * 路由配置
+ */
+const routes = Object.keys(files).map((item) => files[item].default);
 
 /**
- * Router配置
+ * 路由配置
  * history: 1.createWebHistory(), 2.createWebHashHistory()
  * routes: 路由跳转配置
  */
@@ -37,7 +21,7 @@ const router = createRouter({
 });
 
 /**
- * 全局前置守卫
+ * 路由前置守卫
  */
 router.beforeEach((to, from, next) => {
   let token = store.state.token;
