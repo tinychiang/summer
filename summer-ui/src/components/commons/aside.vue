@@ -6,7 +6,7 @@
     </div>
     <el-menu-item index="1">
       <i class="el-icon-data-analysis"></i>
-      <template #title>仪表盘</template>
+      <template #title>综合概览</template>
     </el-menu-item>
     <el-submenu index="2">
       <template #title>
