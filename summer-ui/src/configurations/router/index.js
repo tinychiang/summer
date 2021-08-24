@@ -4,7 +4,8 @@ import store from '~@/store';
 /**
  * 路由文件加载
  */
-const files = import.meta.globEager('/src/components/modules/**/*.router.js');
+const files = import.meta.globEager('/src/components/**/*.router.js');
+
 /**
  * 路由配置
  */

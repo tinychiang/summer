@@ -37,7 +37,7 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   position: absolute;
-  background: url("@/assets/summer.jpg") no-repeat center/100%;
+  background: url("@/assets/login.jpg") no-repeat center/100%;
 }
 .box {
   width: 35%;
