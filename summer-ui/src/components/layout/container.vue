@@ -23,8 +23,38 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style>
 .el-container {
   height: 100%;
+}
+.el-breadcrumb {
+  margin-bottom: 10px;
+}
+.el-card {
+  margin: 10px;
+}
+.primary {
+  color: #409eff;
+}
+.warning {
+  color: #e6a23c;
+}
+.success {
+  color: #67c23a;
+}
+.danger {
+  color: #f56c6c;
+}
+.info {
+  color: #909399;
+}
+.black {
+  color: #303133;
+}
+.blod {
+  font-weight: bold;
+}
+.extra-large {
+  font-size: 20px;
 }
 </style>

@@ -1,7 +1,9 @@
 <template>
   <el-header>
     <el-row justify="end">
-      <el-col :xs="6" :sm="4" :md="2" :lg="1">Admin</el-col>
+      <el-col :xs="6" :sm="4" :md="2" :lg="1">
+        <el-button type="text" class="black" @click="drawer=true">Admin</el-button>
+      </el-col>
       <el-col :xs="6" :sm="4" :md="2" :lg="1">
         <el-dropdown trigger="click">
           <el-avatar shape="square" size="large" src="/src/assets/logo.png"></el-avatar>
@@ -19,12 +21,18 @@
       </el-col>
     </el-row>
   </el-header>
+  <el-drawer title="Secret" v-model="drawer" direction="rtl" destroy-on-close></el-drawer>
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
+  setup() {
+    return {
+      drawer: ref(false),
+    };
+  },
   methods: {
     logout() {
       // TODO
