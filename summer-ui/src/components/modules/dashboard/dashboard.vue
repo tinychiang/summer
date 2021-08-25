@@ -143,7 +143,7 @@ export default defineComponent({
         {
           name: "科创板 T5",
           type: "pie",
-          radius: ["50%", "100%"],
+          radius: ["60%", "95%"],
           avoidLabelOverlap: false,
           itemStyle: {
             borderRadius: 10,

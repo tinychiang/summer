@@ -21,7 +21,18 @@
       </el-col>
     </el-row>
   </el-header>
-  <el-drawer title="Secret" v-model="drawer" direction="rtl" destroy-on-close></el-drawer>
+  <el-drawer v-model="drawer" direction="rtl" :with-header="false" destroy-on-close>
+    <el-card v-for="item in hhiv" :key="item">
+      <el-row :gutter="20" justify="center" align="bottom">
+        <el-col :span="10" class="primary" align="center">{{item.name}}&nbsp;[{{item.code}}]</el-col>
+        <el-col :span="4" class="warning" align="center">{{item.count}}</el-col>
+        <el-col :span="10" class="success" align="center">
+          <i :class="item.status==='up'?'el-icon-caret-top':'el-icon-caret-bottom'" />{{item.quantity}}&nbsp;
+          <i :class="item.status==='up'?'el-icon-caret-top':'el-icon-caret-bottom'" />{{item.percent}}
+        </el-col>
+      </el-row>
+    </el-card>
+  </el-drawer>
 </template>
 
 <script>
@@ -31,6 +42,32 @@ export default defineComponent({
   setup() {
     return {
       drawer: ref(false),
+      hhiv: [
+        {
+          name: "上证指数",
+          code: "000001",
+          count: 3540.38,
+          status: "up",
+          quantity: 25.91,
+          percent: "0.74%",
+        },
+        {
+          name: "深证指数",
+          code: "399001",
+          count: 14697.5,
+          status: "up",
+          quantity: 33.95,
+          percent: "0.23%",
+        },
+        {
+          name: "恒生指数",
+          code: "HSI",
+          count: 25693.95,
+          status: "down",
+          quantity: -33.97,
+          percent: "-0.13%",
+        },
+      ],
     };
   },
   methods: {
@@ -52,5 +89,8 @@ export default defineComponent({
 }
 .el-avatar {
   margin-top: 5px;
+}
+.el-drawer__title {
+  margin-bottom: 0 !important;
 }
 </style>
