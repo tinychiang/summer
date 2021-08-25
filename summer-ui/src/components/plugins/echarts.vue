@@ -1,6 +1,7 @@
 <template>
   <div :style="{height: height}" :id="id"></div>
 </template>
+
 <script>
 import { defineComponent, onMounted, watch } from "vue";
 import * as echarts from "echarts";
@@ -41,4 +42,5 @@ export default defineComponent({
   },
 });
 </script>
+
 <style scoped></style>

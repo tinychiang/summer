@@ -15,7 +15,8 @@
 </template>
 <script>
 import { defineComponent, ref } from "vue";
-import Service from "@/components/modules/login/login.service";
+import store from "~@/store";
+import router from "~@/router";
 
 export default defineComponent({
   setup() {
@@ -26,7 +27,8 @@ export default defineComponent({
   },
   methods: {
     login: function () {
-      Service.login(this.username, this.password);
+      store.commit("change", "123456");
+      router.push({ name: "dashboard" });
     },
   },
 });

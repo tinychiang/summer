@@ -1,145 +1,137 @@
 <template>
-  <el-container>
-    <Aside />
-    <el-container direction="vertical">
-      <Header />
-      <el-main>
-        <el-breadcrumb separator="/">
-          <el-breadcrumb-item class="el-icon-data-analysis">&nbsp;综合概览</el-breadcrumb-item>
-        </el-breadcrumb>
-        <el-row :gutter="20">
-          <el-col :span="12">
-            <Echarts :height="'300px'" :option="option" />
-          </el-col>
+  <el-breadcrumb separator="/">
+    <el-breadcrumb-item class="el-icon-data-analysis">&nbsp;综合概览</el-breadcrumb-item>
+  </el-breadcrumb>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <Echarts :height="'300px'" :option="option" />
+    </el-col>
 
-          <el-col :span="12">
-            <el-carousel trigger="click" height="300px">
-              <el-carousel-item v-for="item in 4" :key="item">
-                <h3 class="small">{{ item }}</h3>
-              </el-carousel-item>
-            </el-carousel>
-          </el-col>
-        </el-row>
+    <el-col :span="12">
+      <el-carousel trigger="click" height="300px">
+        <el-carousel-item v-for="item in 4" :key="item">
+          <h3 class="small">{{ item }}</h3>
+        </el-carousel-item>
+      </el-carousel>
+    </el-col>
+  </el-row>
 
-        <el-divider><i class="el-icon-position"></i></el-divider>
+  <el-divider><i class="el-icon-position"></i></el-divider>
 
-        <el-row :gutter="20">
-          <el-col :sm="6" :lg="3">
-            <el-button type="success" @click="notify('成功','success')">成功</el-button>
-          </el-col>
-          <el-col :sm="6" :lg="3">
-            <el-button plain type="warning" @click="notify('警告','warning')">警告</el-button>
-          </el-col>
-          <el-col :sm="6" :lg="3">
-            <el-button round type="info" @click="notify('消息','info')">消息</el-button>
-          </el-col>
-          <el-col :sm="6" :lg="3">
-            <el-button type="danger" @click="notify('错误','error')">错误</el-button>
-          </el-col>
-          <el-col :sm="6" :lg="3">
-            <el-tooltip class="item" effect="dark" content="提示文字" placement="bottom">
-              <el-button>提示</el-button>
-            </el-tooltip>
-          </el-col>
-          <el-col :sm="6" :lg="3">
-            <el-popconfirm confirmButtonText='Yes' cancelButtonText='No' icon="el-icon-info" iconColor="red" title="...？">
-              <template #reference>
-                <el-button type="text">气泡</el-button>
-              </template>
-            </el-popconfirm>
-          </el-col>
-          <el-col :sm="6" :lg="3">
-            <el-popover placement="bottom" title="标题" :width="200" trigger="click" content="...">
-              <template #reference>
-                <el-button type="warning">弹出框</el-button>
-              </template>
-            </el-popover>
-          </el-col>
-          <el-col :sm="6" :lg="3">
-            <el-button type="primary" icon="el-icon-share" @click="drawer = true">抽屉</el-button>
-          </el-col>
-          <el-drawer title="标题" v-model="drawer" direction="rtl" destroy-on-close></el-drawer>
-        </el-row>
+  <el-row :gutter="20">
+    <el-col :sm="6" :lg="3">
+      <el-button type="success" @click="notify('成功','success')">成功</el-button>
+    </el-col>
+    <el-col :sm="6" :lg="3">
+      <el-button plain type="warning" @click="notify('警告','warning')">警告</el-button>
+    </el-col>
+    <el-col :sm="6" :lg="3">
+      <el-button round type="info" @click="notify('消息','info')">消息</el-button>
+    </el-col>
+    <el-col :sm="6" :lg="3">
+      <el-button type="danger" @click="notify('错误','error')">错误</el-button>
+    </el-col>
+    <el-col :sm="6" :lg="3">
+      <el-tooltip class="item" effect="dark" content="提示文字" placement="bottom">
+        <el-button>提示</el-button>
+      </el-tooltip>
+    </el-col>
+    <el-col :sm="6" :lg="3">
+      <el-popconfirm confirmButtonText='Yes' cancelButtonText='No' icon="el-icon-info" iconColor="red" title="...？">
+        <template #reference>
+          <el-button type="text">气泡</el-button>
+        </template>
+      </el-popconfirm>
+    </el-col>
+    <el-col :sm="6" :lg="3">
+      <el-popover placement="bottom" title="标题" :width="200" trigger="click" content="...">
+        <template #reference>
+          <el-button type="warning">弹出框</el-button>
+        </template>
+      </el-popover>
+    </el-col>
+    <el-col :sm="6" :lg="3">
+      <el-button type="primary" icon="el-icon-share" @click="drawer = true">抽屉</el-button>
+    </el-col>
+    <el-drawer title="标题" v-model="drawer" direction="rtl" destroy-on-close></el-drawer>
+  </el-row>
 
-        <el-row :gutter="20">
-          <el-col :sm="12" :lg="6">
-            <el-result icon="success" title="成功提示" subTitle="请根据提示进行操作">
-              <template #extra>
-                <el-button type="primary" size="medium">返回</el-button>
-              </template>
-            </el-result>
-          </el-col>
-          <el-col :sm="12" :lg="6">
-            <el-result icon="warning" title="警告提示" subTitle="请根据提示进行操作">
-              <template #extra>
-                <el-button type="primary" size="medium">返回</el-button>
-              </template>
-            </el-result>
-          </el-col>
-          <el-col :sm="12" :lg="6">
-            <el-result icon="error" title="错误提示" subTitle="请根据提示进行操作">
-              <template #extra>
-                <el-button type="primary" size="medium">返回</el-button>
-              </template>
-            </el-result>
-          </el-col>
-          <el-col :sm="12" :lg="6">
-            <el-result icon="info" title="信息提示" subTitle="请根据提示进行操作">
-              <template #extra>
-                <el-button type="primary" size="medium">返回</el-button>
-              </template>
-            </el-result>
-          </el-col>
-        </el-row>
-        <el-row :gutter="20">
-          <el-col :span="8">
-            <el-card shadow="hover">悬浮A</el-card>
-          </el-col>
-          <el-col :span="8">
-            <el-card shadow="hover">悬浮B</el-card>
-          </el-col>
-          <el-col :span="8">
-            <el-card shadow="hover">悬浮C</el-card>
-          </el-col>
-        </el-row>
+  <el-row :gutter="20">
+    <el-col :sm="12" :lg="6">
+      <el-result icon="success" title="成功提示" subTitle="请根据提示进行操作">
+        <template #extra>
+          <el-button type="primary" size="medium">返回</el-button>
+        </template>
+      </el-result>
+    </el-col>
+    <el-col :sm="12" :lg="6">
+      <el-result icon="warning" title="警告提示" subTitle="请根据提示进行操作">
+        <template #extra>
+          <el-button type="primary" size="medium">返回</el-button>
+        </template>
+      </el-result>
+    </el-col>
+    <el-col :sm="12" :lg="6">
+      <el-result icon="error" title="错误提示" subTitle="请根据提示进行操作">
+        <template #extra>
+          <el-button type="primary" size="medium">返回</el-button>
+        </template>
+      </el-result>
+    </el-col>
+    <el-col :sm="12" :lg="6">
+      <el-result icon="info" title="信息提示" subTitle="请根据提示进行操作">
+        <template #extra>
+          <el-button type="primary" size="medium">返回</el-button>
+        </template>
+      </el-result>
+    </el-col>
+  </el-row>
+  
+  <el-row :gutter="20">
+    <el-col :span="8">
+      <el-card shadow="hover">悬浮A</el-card>
+    </el-col>
+    <el-col :span="8">
+      <el-card shadow="hover">悬浮B</el-card>
+    </el-col>
+    <el-col :span="8">
+      <el-card shadow="hover">悬浮C</el-card>
+    </el-col>
+  </el-row>
 
-        <el-row :gutter="20">
-          <el-col :span="12">
-            <el-timeline>
-              <el-timeline-item timestamp="2018/4/12" placement="top">
-                <el-card>
-                  <h4>事件A</h4>
-                  <p>... 2021/08/24 23:59</p>
-                </el-card>
-              </el-timeline-item>
-              <el-timeline-item timestamp="2018/4/3" placement="top">
-                <el-card>
-                  <h4>进行中</h4>
-                  <p>... 2021/08/24 23:59</p>
-                </el-card>
-              </el-timeline-item>
-              <el-timeline-item timestamp="2018/4/2" placement="top">
-                <el-card>
-                  <h4>完结</h4>
-                  <p>... 2021/08/24 23:59</p>
-                </el-card>
-              </el-timeline-item>
-            </el-timeline>
-          </el-col>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <el-timeline>
+        <el-timeline-item timestamp="2018/4/12" placement="top">
+          <el-card>
+            <h4>事件A</h4>
+            <p>... 2021/08/24 23:59</p>
+          </el-card>
+        </el-timeline-item>
+        <el-timeline-item timestamp="2018/4/3" placement="top">
+          <el-card>
+            <h4>进行中</h4>
+            <p>... 2021/08/24 23:59</p>
+          </el-card>
+        </el-timeline-item>
+        <el-timeline-item timestamp="2018/4/2" placement="top">
+          <el-card>
+            <h4>完结</h4>
+            <p>... 2021/08/24 23:59</p>
+          </el-card>
+        </el-timeline-item>
+      </el-timeline>
+    </el-col>
 
-          <el-col :span="12">
-            <el-calendar v-model="date"></el-calendar>
-          </el-col>
-        </el-row>
-      </el-main>
-    </el-container>
-  </el-container>
+    <el-col :span="12">
+      <el-calendar v-model="date"></el-calendar>
+    </el-col>
+  </el-row>
 </template>
+
 <script>
-import { defineComponent, onMounted, ref, watch } from "vue";
+import { defineComponent, ref } from "vue";
 import * as echarts from "echarts";
-import Aside from "@/components/commons/aside.vue";
-import Header from "@/components/commons/header.vue";
 import Echarts from "@/components/plugins/echarts.vue";
 
 export default defineComponent({
@@ -326,8 +318,6 @@ export default defineComponent({
     };
   },
   components: {
-    Aside,
-    Header,
     Echarts,
   },
   methods: {
@@ -341,8 +331,9 @@ export default defineComponent({
   },
 });
 </script>
+
 <style scoped>
-.el-main button {
+button {
   width: 100%;
 }
 .el-carousel,

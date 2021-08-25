@@ -20,6 +20,7 @@
     </el-row>
   </el-header>
 </template>
+
 <script>
 import { defineComponent } from "vue";
 
@@ -33,7 +34,8 @@ export default defineComponent({
   },
 });
 </script>
-<style>
+
+<style scoped>
 .el-header {
   height: 50px;
   line-height: 50px;

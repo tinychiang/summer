@@ -1,25 +1,28 @@
 <template>
   <el-aside>
-    <el-menu default-active="1" background-color="#545c64" text-color="#eeeeee" active-text-color="#ffd04b" :collapse="collapse">
+    <el-menu default-active="/dashboard" :router=true background-color="#545c64" text-color="#eeeeee" active-text-color="#ffd04b" :collapse="collapse">
       <div class="logo" align="center">
         <el-image src="/src/assets/logo.png"></el-image>
       </div>
-      <el-menu-item index="1">
+      <el-menu-item index="/dashboard">
         <i class="el-icon-data-analysis"></i>
         <template #title>综合概览</template>
       </el-menu-item>
-      <el-submenu index="2">
+      <el-submenu index="user">
         <template #title>
           <i class="el-icon-user"></i>
-          <span>用户管理</span>
+          <span>系统用户</span>
         </template>
-        <el-submenu index="2-1">
-          <template #title>部门</template>
-          <el-menu-item index="2-1-1">销售部</el-menu-item>
-          <el-menu-item index="2-1-2">研发部</el-menu-item>
-        </el-submenu>
+        <el-menu-item index="/role">
+          <i class="el-icon-orange"></i>
+          <template #title>权限管理</template>
+        </el-menu-item>
+        <el-menu-item index="/user">
+          <i class="el-icon-ice-cream"></i>
+          <template #title>用户管理</template>
+        </el-menu-item>
       </el-submenu>
-      <el-menu-item index="3">
+      <el-menu-item index="/system">
         <i class="el-icon-setting"></i>
         <template #title>系统设置</template>
       </el-menu-item>
@@ -27,8 +30,10 @@
     </el-menu>
   </el-aside>
 </template>
+
 <script>
 import { defineComponent, ref } from "vue";
+import { uuid } from "vue-uuid";
 
 export default defineComponent({
   setup() {
@@ -48,8 +53,8 @@ export default defineComponent({
   },
 });
 </script>
-<style>
-.el-container,
+
+<style scoped>
 .el-aside,
 .el-menu {
   height: 100%;
@@ -60,14 +65,14 @@ export default defineComponent({
 .el-menu:not(.el-menu--collapse) {
   width: 215px;
 }
+.el-image {
+  height: 100%;
+}
 .logo {
   height: 35px;
   margin-top: 10px;
   margin-bottom: 5px;
   overflow: hidden;
-}
-.el-image {
-  height: 100%;
 }
 .collapse-button {
   bottom: 0;

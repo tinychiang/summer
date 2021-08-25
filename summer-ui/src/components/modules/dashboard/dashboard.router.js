@@ -9,4 +9,5 @@ const route = {
   path: '/dashboard',
   component: () => import('@/components/modules/dashboard/dashboard.vue'),
 };
+
 export default route;

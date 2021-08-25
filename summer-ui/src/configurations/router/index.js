@@ -4,7 +4,7 @@ import store from '~@/store';
 /**
  * 路由文件加载
  */
-const files = import.meta.globEager('/src/components/**/*.router.js');
+const files = import.meta.globEager('/src/components/modules/**/*.router.js');
 
 /**
  * 路由配置
@@ -18,7 +18,18 @@ const routes = Object.keys(files).map((item) => files[item].default);
  */
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes: [
+    {
+      name: 'login',
+      path: '/login',
+      component: () => import('@/components/login.vue'),
+    },
+    {
+      path: '/',
+      component: () => import('@/components/layout/container.vue'),
+      children: routes,
+    },
+  ],
 });
 
 /**
