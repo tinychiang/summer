@@ -1,33 +1,35 @@
 <template>
-
-  <el-menu default-active="1" background-color="#545c64" text-color="#eeeeee" active-text-color="#ffd04b" :collapse="collapse">
-    <div class="logo" align="center">
-      <el-image src="/src/assets/logo.png"></el-image>
-    </div>
-    <el-menu-item index="1">
-      <i class="el-icon-data-analysis"></i>
-      <template #title>综合概览</template>
-    </el-menu-item>
-    <el-submenu index="2">
-      <template #title>
-        <i class="el-icon-user"></i>
-        <span>用户管理</span>
-      </template>
-      <el-submenu index="2-1">
-        <template #title>部门</template>
-        <el-menu-item index="2-1-1">销售部</el-menu-item>
-        <el-menu-item index="2-1-2">研发部</el-menu-item>
+  <el-aside>
+    <el-menu default-active="1" background-color="#545c64" text-color="#eeeeee" active-text-color="#ffd04b" :collapse="collapse">
+      <div class="logo" align="center">
+        <el-image src="/src/assets/logo.png"></el-image>
+      </div>
+      <el-menu-item index="1">
+        <i class="el-icon-data-analysis"></i>
+        <template #title>综合概览</template>
+      </el-menu-item>
+      <el-submenu index="2">
+        <template #title>
+          <i class="el-icon-user"></i>
+          <span>用户管理</span>
+        </template>
+        <el-submenu index="2-1">
+          <template #title>部门</template>
+          <el-menu-item index="2-1-1">销售部</el-menu-item>
+          <el-menu-item index="2-1-2">研发部</el-menu-item>
+        </el-submenu>
       </el-submenu>
-    </el-submenu>
-    <el-menu-item index="3">
-      <i class="el-icon-setting"></i>
-      <template #title>设置</template>
-    </el-menu-item>
-    <el-button type="text" class="collapse-button" :icon="collapseIcon" @click="collapseHandle()"></el-button>
-  </el-menu>
+      <el-menu-item index="3">
+        <i class="el-icon-setting"></i>
+        <template #title>系统设置</template>
+      </el-menu-item>
+      <el-button type="text" class="collapse-button" :icon="collapseIcon" @click="collapseHandle"></el-button>
+    </el-menu>
+  </el-aside>
 </template>
 <script>
 import { defineComponent, ref } from "vue";
+
 export default defineComponent({
   setup() {
     return {
@@ -41,6 +43,7 @@ export default defineComponent({
       this.collapseIcon = this.collapse
         ? "el-icon-arrow-right"
         : "el-icon-arrow-left";
+      this.$store.commit("collapse", this.collapse);
     },
   },
 });

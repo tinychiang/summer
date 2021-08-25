@@ -1,19 +1,15 @@
 <template>
   <el-container>
-    <el-aside>
-      <Aside />
-    </el-aside>
-    <el-container>
-      <el-header>
-        <Header />
-      </el-header>
+    <Aside />
+    <el-container direction="vertical">
+      <Header />
       <el-main>
         <el-breadcrumb separator="/">
           <el-breadcrumb-item class="el-icon-data-analysis">&nbsp;综合概览</el-breadcrumb-item>
         </el-breadcrumb>
         <el-row :gutter="20">
           <el-col :span="12">
-            <div id="graph"></div>
+            <Echarts :height="'300px'" :option="option" />
           </el-col>
 
           <el-col :span="12">
@@ -136,24 +132,22 @@
           </el-col>
         </el-row>
       </el-main>
-      <el-footer>
-        <Footer />
-      </el-footer>
     </el-container>
   </el-container>
 </template>
 <script>
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent, onMounted, ref, watch } from "vue";
 import * as echarts from "echarts";
 import Aside from "@/components/commons/aside.vue";
 import Header from "@/components/commons/header.vue";
-import Footer from "@/components/commons/footer.vue";
+import Echarts from "@/components/plugins/echarts.vue";
 
 export default defineComponent({
   setup() {
-    onMounted(() => {
-      let graph = echarts.init(document.getElementById("graph"));
-      graph.setOption({
+    return {
+      drawer: ref(false),
+      date: ref(new Date()),
+      option: {
         color: ["#80FFA5", "#00DDFF", "#37A2FF", "#FF0087", "#FFBF00"],
         tooltip: {
           trigger: "axis",
@@ -165,12 +159,13 @@ export default defineComponent({
           },
         },
         legend: {
-          padding: [30, 0, 0, 0],
+          padding: [45, 0, 0, 0],
           data: ["Line 1", "Line 2", "Line 3", "Line 4", "Line 5"],
         },
         grid: {
-          left: "2%",
+          top: "25%",
           right: "2%",
+          left: "2%",
           bottom: "0",
           containLabel: true,
         },
@@ -327,21 +322,13 @@ export default defineComponent({
             data: [220, 302, 181, 234, 210, 290, 150],
           },
         ],
-      });
-      window.onresize = () => {
-        console.log(1111);
-        graph.resize();
-      };
-    });
-    return {
-      drawer: ref(false),
-      date: ref(new Date()),
+      },
     };
   },
   components: {
     Aside,
     Header,
-    Footer,
+    Echarts,
   },
   methods: {
     notify(name, type) {
@@ -357,9 +344,6 @@ export default defineComponent({
 <style scoped>
 .el-main button {
   width: 100%;
-}
-#graph {
-  height: 300px;
 }
 .el-carousel,
 .el-timeline {
