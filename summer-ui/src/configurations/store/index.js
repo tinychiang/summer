@@ -5,7 +5,7 @@ import Vuex from 'vuex';
  */
 export default new Vuex.Store({
   state: {
-    token: localStorage.getItem('token'),
+    token: sessionStorage.getItem('token'),
     collapse: true,
   },
   mutations: {
@@ -16,7 +16,7 @@ export default new Vuex.Store({
      */
     change(state, token) {
       state.token = token;
-      localStorage.setItem('token', token);
+      sessionStorage.setItem('token', token);
     },
     /**
      * 删除token
@@ -24,7 +24,7 @@ export default new Vuex.Store({
      */
     remove(state) {
       state.token = null;
-      localStorage.removeItem('token');
+      sessionStorage.removeItem('token');
     },
     /**
      * 修改导航折叠状态

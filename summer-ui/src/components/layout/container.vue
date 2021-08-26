@@ -5,6 +5,7 @@
       <Header />
       <el-main>
         <router-view />
+        <Drawer />
       </el-main>
     </el-container>
   </el-container>
@@ -14,13 +15,17 @@
 import { defineComponent } from "vue";
 import Aside from "@/components/layout/aside.vue";
 import Header from "@/components/layout/header.vue";
+import Drawer from "@/components/layout/drawer.vue";
 
 export default defineComponent({
   components: {
     Aside,
     Header,
+    Drawer,
   },
 });
+
+Drawer;
 </script>
 
 <style>
@@ -47,6 +52,9 @@ export default defineComponent({
 }
 .info {
   color: #909399;
+}
+.dark {
+  color: #606266;
 }
 .black {
   color: #303133;

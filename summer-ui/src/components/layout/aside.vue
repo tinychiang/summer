@@ -69,10 +69,9 @@ export default defineComponent({
   height: 100%;
 }
 .logo {
-  height: 35px;
-  margin-top: 10px;
-  margin-bottom: 5px;
-  overflow: hidden;
+  height: 34px;
+  padding: 8px;
+  background-color: #909399;
 }
 .collapse-button {
   bottom: 0;
