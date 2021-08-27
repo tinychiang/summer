@@ -5,7 +5,7 @@
       <Header />
       <el-main>
         <router-view />
-        <Drawer />
+        <Affix />
       </el-main>
     </el-container>
   </el-container>
@@ -15,17 +15,15 @@
 import { defineComponent } from "vue";
 import Aside from "@/components/layout/aside.vue";
 import Header from "@/components/layout/header.vue";
-import Drawer from "@/components/layout/drawer.vue";
+import Affix from "@/components/layout/affix.vue";
 
 export default defineComponent({
   components: {
     Aside,
     Header,
-    Drawer,
+    Affix,
   },
 });
-
-Drawer;
 </script>
 
 <style>
@@ -33,10 +31,7 @@ Drawer;
   height: 100%;
 }
 .el-breadcrumb {
-  margin-bottom: 10px;
-}
-.el-card {
-  margin: 10px;
+  margin-bottom: 20px;
 }
 .primary {
   color: #409eff;

@@ -31,7 +31,7 @@
         <template #header>
           <span class="info"><i class="el-icon-data-line" /> 深指走势</span>
         </template>
-        <Echarts :height="height" :option="line" />
+        <Echarts :height="'300px'" :option="line" />
       </el-card>
     </el-col>
     <el-col :span="8">
@@ -39,7 +39,7 @@
         <template #header>
           <span class="info"><i class="el-icon-bangzhu" /> 科创板</span>
         </template>
-        <Echarts :height="height" :option="pie" />
+        <Echarts :height="'300px'" :option="pie" />
       </el-card>
     </el-col>
   </el-row>
@@ -47,161 +47,15 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import Echarts from "@/components/plugins/echarts.vue";
+import Echarts from "@/components/plugins/echarts/echarts.vue";
+import hhiv from "@/components/data/hhiv";
+import line from "@/components/plugins/echarts/echarts.markLine";
+import pie from "@/components/plugins/echarts/echarts.circlePie";
 
 export default defineComponent({
   setup() {
-    const markLine = [];
-    const positions = [
-      "start",
-      "middle",
-      "end",
-      "insideStart",
-      "insideStartTop",
-      "insideStartBottom",
-      "insideMiddle",
-      "insideMiddleTop",
-      "insideMiddleBottom",
-      "insideEnd",
-      "insideEndTop",
-      "insideEndBottom",
-    ];
-    for (var i = 0; i < positions.length; ++i) {
-      markLine.push({
-        name: positions[i],
-        yAxis: 1.8 - 0.2 * Math.floor(i / 3),
-        label: {
-          formatter: "{b}",
-          position: positions[i],
-        },
-      });
-
-      if (positions[i] !== "middle") {
-        const name =
-          positions[i] === "insideMiddle"
-            ? "insideMiddle / middle"
-            : positions[i];
-
-        markLine.push([
-          {
-            name: "start: " + positions[i],
-            coord: [0, 0.3],
-            label: {
-              formatter: name,
-              position: positions[i],
-            },
-          },
-          {
-            name: "end: " + positions[i],
-            coord: [3, 1],
-          },
-        ]);
-      }
-    }
-    const line = {
-      animation: false,
-      textStyle: {
-        fontSize: 14,
-      },
-      xAxis: {
-        data: ["A", "B", "C", "D", "E"],
-        boundaryGap: true,
-        splitArea: {
-          show: true,
-        },
-      },
-      yAxis: {
-        max: 2,
-      },
-      series: [
-        {
-          name: "line",
-          type: "line",
-          stack: "all",
-          symbolSize: 6,
-          data: [0.3, 1.4, 1.2, 1, 0.6],
-          markLine: {
-            data: markLine,
-            label: {
-              distance: [20, 8],
-            },
-          },
-        },
-      ],
-      grid: {
-        top: 20,
-        left: 50,
-        right: 50,
-        bottom: 30,
-      },
-    };
-    const pie = {
-      tooltip: {
-        trigger: "item",
-      },
-      series: [
-        {
-          name: "科创板 T5",
-          type: "pie",
-          radius: ["60%", "95%"],
-          avoidLabelOverlap: false,
-          itemStyle: {
-            borderRadius: 10,
-            borderColor: "#fff",
-            borderWidth: 2,
-          },
-          label: {
-            show: false,
-            position: "center",
-          },
-          emphasis: {
-            label: {
-              show: true,
-              fontSize: "20",
-              fontWeight: "bold",
-            },
-          },
-          labelLine: {
-            show: false,
-          },
-          data: [
-            { value: 20.01, name: "正帆科技" },
-            { value: 20.01, name: "九号公司-WD" },
-            { value: 20, name: "键凯科技" },
-            { value: 20, name: "金博股份" },
-            { value: 19.71, name: "华峰测控" },
-          ],
-        },
-      ],
-    };
     return {
-      hhiv: [
-        {
-          name: "上证指数",
-          code: "000001",
-          count: 3540.38,
-          status: "up",
-          quantity: 25.91,
-          percent: "0.74%",
-        },
-        {
-          name: "深证指数",
-          code: "399001",
-          count: 14697.5,
-          status: "up",
-          quantity: 33.95,
-          percent: "0.23%",
-        },
-        {
-          name: "恒生指数",
-          code: "HSI",
-          count: 25693.95,
-          status: "down",
-          quantity: -33.97,
-          percent: "-0.13%",
-        },
-      ],
-      height: ref("300px"),
+      hhiv,
       line,
       pie,
     };

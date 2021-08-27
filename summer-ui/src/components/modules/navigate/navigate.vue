@@ -1,6 +1,6 @@
 <template>
   <el-breadcrumb separator="/">
-    <el-breadcrumb-item class="el-icon-setting">&nbsp;系统设置</el-breadcrumb-item>
+    <el-breadcrumb-item class="el-icon-menu">&nbsp;导航管理</el-breadcrumb-item>
   </el-breadcrumb>
 </template>
 

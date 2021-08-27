@@ -1,31 +1,10 @@
 <template>
   <el-aside>
-    <el-menu default-active="/dashboard" :router=true background-color="#545c64" text-color="#eeeeee" active-text-color="#ffd04b" :collapse="collapse">
+    <el-menu :router="true" background-color="#545c64" text-color="#eeeeee" active-text-color="#ffd04b" :collapse="collapse">
       <div class="logo" align="center">
         <el-image src="/src/assets/logo.png"></el-image>
       </div>
-      <el-menu-item index="/dashboard">
-        <i class="el-icon-data-analysis"></i>
-        <template #title>综合概览</template>
-      </el-menu-item>
-      <el-submenu index="user">
-        <template #title>
-          <i class="el-icon-user"></i>
-          <span>系统用户</span>
-        </template>
-        <el-menu-item index="/role">
-          <i class="el-icon-orange"></i>
-          <template #title>权限管理</template>
-        </el-menu-item>
-        <el-menu-item index="/user">
-          <i class="el-icon-ice-cream"></i>
-          <template #title>用户管理</template>
-        </el-menu-item>
-      </el-submenu>
-      <el-menu-item index="/system">
-        <i class="el-icon-setting"></i>
-        <template #title>系统设置</template>
-      </el-menu-item>
+      <Menu :navigations="nav" />
       <el-button type="text" class="collapse-button" :icon="collapseIcon" @click="collapseHandle"></el-button>
     </el-menu>
   </el-aside>
@@ -33,14 +12,19 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import { uuid } from "vue-uuid";
+import Menu from "@/components/layout/menu.vue";
+import nav from "@/components/data/nav";
 
 export default defineComponent({
   setup() {
     return {
-      collapse: ref(true),
+      nav,
+      collapse: ref(false),
       collapseIcon: ref("el-icon-arrow-right"),
     };
+  },
+  components: {
+    Menu,
   },
   methods: {
     collapseHandle() {

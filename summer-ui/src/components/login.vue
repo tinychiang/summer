@@ -28,7 +28,7 @@ export default defineComponent({
   methods: {
     login: function () {
       store.commit("change", "123456");
-      router.push({ name: "dashboard" });
+      router.push("/");
     },
   },
 });
