@@ -1,9 +1,6 @@
 <template>
-  <el-breadcrumb separator="/">
-    <el-breadcrumb-item class="el-icon-s-custom">&nbsp;账号</el-breadcrumb-item>
-  </el-breadcrumb>
   <el-row justify="center">
-    <el-col :span="20">
+    <el-col :span="12">
       <el-tabs tab-position="left">
         <el-tab-pane label="基础信息">
           <el-descriptions :column="1" border>
@@ -31,7 +28,7 @@
           <el-button type="primary" size="small">保存</el-button>
           <el-button type="danger" size="small">重置</el-button>
         </el-tab-pane>
-        <el-tab-pane label="账户信息" align="center">
+        <el-tab-pane label="用户密码" align="center">
           <el-avatar :size="150" src="/src/assets/logo.png" />
           <el-form ref="form" :model="user" label-width="80px">
             <el-form-item label="用户名">

@@ -19,7 +19,7 @@ export default defineComponent({
   setup() {
     return {
       nav,
-      collapse: ref(false),
+      collapse: ref(true),
       collapseIcon: ref("el-icon-arrow-right"),
     };
   },

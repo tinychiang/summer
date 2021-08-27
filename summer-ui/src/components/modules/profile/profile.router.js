@@ -5,9 +5,9 @@
  * component 组件位置
  */
  const route = {
-    name: 'account',
-    path: '/account',
-    component: () => import('@/components/modules/account/account.vue'),
+    name: 'profile',
+    path: '/profile',
+    component: () => import('@/components/modules/profile/profile.vue'),
   };
   
   export default route;

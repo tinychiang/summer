@@ -6,7 +6,7 @@ import Vuex from 'vuex';
 export default new Vuex.Store({
   state: {
     token: sessionStorage.getItem('token'),
-    collapse: false,
+    collapse: true,
   },
   mutations: {
     /**

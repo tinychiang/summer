@@ -1,7 +1,4 @@
 <template>
-  <el-breadcrumb separator="/">
-    <el-breadcrumb-item class="el-icon-data-analysis">&nbsp;综合概览</el-breadcrumb-item>
-  </el-breadcrumb>
   <!-- card -->
   <el-row :gutter="20" justify="center">
     <el-col :span="8" align="center" v-for="item in hhiv" :key="item">
@@ -66,4 +63,8 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.el-row{
+  margin-bottom: 20px;
+}
+</style>

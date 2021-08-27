@@ -4,7 +4,7 @@
       <i :class="nav.icon" />
       <template #title>{{nav.name}}</template>
     </el-menu-item>
-    <el-submenu v-else :index="nav.index">
+    <el-submenu v-else :index="nav.path">
       <template #title>
         <i :class="nav.icon" />
         <span>{{nav.name}}</span>

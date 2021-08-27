@@ -40,7 +40,7 @@ import { defineComponent, ref } from "vue";
 export default defineComponent({
   methods: {
     account() {
-      this.$router.push("/account");
+      this.$router.push("/profile");
     },
     logout() {
       // TODO
