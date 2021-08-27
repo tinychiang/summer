@@ -21,6 +21,7 @@
       </template>
     </el-table-column>
   </el-table>
+  <el-pagination layout="prev, pager, next" :total="50" align="center" class="dark" />
 </template>
 
 <script>
@@ -45,4 +46,8 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.el-pagination {
+  margin-top: 10px;
+}
+</style>
