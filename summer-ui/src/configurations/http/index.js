@@ -66,7 +66,7 @@ const valid = (object) => {
  * 其他: 弹出异常
  */
 const handle = (object) => {
-  if (code === '200') {
+  if (object.code === '200') {
     return object.data;
   } else if (object.code === '401') {
     store.commit('remove');
