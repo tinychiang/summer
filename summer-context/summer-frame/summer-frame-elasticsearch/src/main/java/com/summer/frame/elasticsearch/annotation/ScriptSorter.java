@@ -5,7 +5,7 @@ import org.elasticsearch.search.sort.ScriptSortBuilder;
 import java.lang.annotation.*;
 
 /**
- * 排序
+ * 脚本排序
  *
  * @author Tiny Chiang
  * @version 1.0.0

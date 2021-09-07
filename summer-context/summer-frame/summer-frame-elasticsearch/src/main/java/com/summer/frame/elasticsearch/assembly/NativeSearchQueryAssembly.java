@@ -49,6 +49,12 @@ public class NativeSearchQueryAssembly<T> {
 
     private static NativeSearchQueryAssembly<?> nativeSearchQueryAssembly = null;
 
+    /**
+     * 私有实例化
+     *
+     * @param condition 条件
+     * @since 1.0.0
+     */
     private NativeSearchQueryAssembly(T condition) {
         this.condition = condition;
         this.clazz = condition.getClass();
@@ -68,36 +74,56 @@ public class NativeSearchQueryAssembly<T> {
         return (NativeSearchQueryAssembly<T>) nativeSearchQueryAssembly;
     }
 
+    /**
+     * 条件类型
+     */
     private final Class<?> clazz;
 
+    /**
+     * 条件实例
+     */
     private final T condition;
 
+    /**
+     * 查询条件
+     */
     private final BoolQueryBuilder boolQueryBuilder;
 
+    /**
+     *
+     */
     private final NativeSearchQueryBuilder nativeSearchQueryBuilder;
 
     public NativeSearchQuery assembly() {
+        // 查询方式
         if (this.clazz.isAnnotationPresent(SearchType.class)) {
             this.searchType();
         }
+        // 过滤 / 排除字段
         if (this.clazz.isAnnotationPresent(FetchSource.class)) {
             this.fetchSourceFilter();
         }
+        // 脚本排序
         if (this.clazz.isAnnotationPresent(ScriptSorter.class)) {
             this.scriptSort();
         }
+        // 批量高亮检索
         if (this.clazz.isAnnotationPresent(Highlighters.class)) {
             this.highlighters();
         }
+        // 高亮检索
         if (this.clazz.isAnnotationPresent(Highlighter.class)) {
             this.highlighter();
         }
+        // 批量聚合分析
         if (this.clazz.isAnnotationPresent(Aggregations.class)) {
             this.aggregations();
         }
+        // 聚合分析
         if (this.clazz.isAnnotationPresent(Aggregation.class)) {
             this.aggregation();
         }
+        // 分页检索
         if (this.condition instanceof AbstractPageHelper) {
             this.fieldSort();
         }
@@ -167,9 +193,11 @@ public class NativeSearchQueryAssembly<T> {
         if (CollectionUtils.isNotEmpty(roots)) {
             roots.forEach(aggregation -> {
                 AbstractAggregationBuilder<?> abstractAggregationBuilder = this.aggregationBuilder(aggregation);
-                while (StringUtils.isNotEmpty(aggregation.subName())) {
-                    aggregation = this.subAggregation(aggregation.subName());
-                    abstractAggregationBuilder.subAggregation(this.aggregationBuilder(aggregation));
+                Aggregation recursiveAggregation = aggregation;
+                while (StringUtils.isNotEmpty(recursiveAggregation.subName())) {
+                    recursiveAggregation = this.subAggregation(recursiveAggregation.subName());
+                    AbstractAggregationBuilder<?> subAbstractAggregationBuilder = this.aggregationBuilder(recursiveAggregation);
+                    abstractAggregationBuilder.subAggregation(subAbstractAggregationBuilder);
                 }
                 this.nativeSearchQueryBuilder.addAggregation(abstractAggregationBuilder);
             });
