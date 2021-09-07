@@ -16,5 +16,6 @@
         <module>summer-frame-mybatis-plus</module>
         <module>summer-frame-redis</module>
         <module>summer-frame-web</module>
+        <module>summer-frame-netty</module>
     </modules>
 </project>

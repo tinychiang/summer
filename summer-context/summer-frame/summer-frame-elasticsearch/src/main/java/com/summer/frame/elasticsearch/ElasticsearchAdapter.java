@@ -3,7 +3,7 @@ package com.summer.frame.elasticsearch;
 import org.springframework.data.elasticsearch.core.SearchHits;
 
 /**
- * 条件筛选、聚合检索等
+ * 检索、聚合分析等
  *
  * @author Tiny Chiang
  * @version 1.0.0
@@ -12,7 +12,7 @@ import org.springframework.data.elasticsearch.core.SearchHits;
 public interface ElasticsearchAdapter {
 
     /**
-     * 分页 / 排序 / 条件 / 聚合筛选统计, 并指定返回类型
+     * 分页 / 排序 / 检索 / 聚合分析, 并指定返回类型
      *
      * @param condition 条件
      * @param target    转换目标类
@@ -25,7 +25,7 @@ public interface ElasticsearchAdapter {
     <T, E> SearchHits<E> search(T condition, Class<E> target);
 
     /**
-     * 游标查询
+     * 游标检索
      *
      * @param condition 条件
      * @param target    转换目标类
