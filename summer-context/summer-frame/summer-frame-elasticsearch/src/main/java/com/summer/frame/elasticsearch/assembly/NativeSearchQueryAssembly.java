@@ -53,6 +53,7 @@ public class NativeSearchQueryAssembly<T> {
      * 私有实例化
      *
      * @param condition 条件
+     * @author Tiny Chiang
      * @since 1.0.0
      */
     private NativeSearchQueryAssembly(T condition) {
@@ -62,6 +63,15 @@ public class NativeSearchQueryAssembly<T> {
         this.nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
     }
 
+    /**
+     * 初始化, 懒汉单例
+     *
+     * @param condition 条件
+     * @param <T>       条件类型
+     * @return 实例化类
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     @SuppressWarnings("unchecked")
     public static <T> NativeSearchQueryAssembly<T> instance(T condition) {
         if (nativeSearchQueryAssembly == null) {
@@ -90,10 +100,17 @@ public class NativeSearchQueryAssembly<T> {
     private final BoolQueryBuilder boolQueryBuilder;
 
     /**
-     *
+     * 动态检索
      */
     private final NativeSearchQueryBuilder nativeSearchQueryBuilder;
 
+    /**
+     * 配置, 检索, 聚合分析等条件组合
+     *
+     * @return 动态查询实例
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     public NativeSearchQuery assembly() {
         // 查询方式
         if (this.clazz.isAnnotationPresent(SearchType.class)) {
@@ -125,35 +142,67 @@ public class NativeSearchQueryAssembly<T> {
         }
         // 分页检索
         if (this.condition instanceof AbstractPageHelper) {
-            this.fieldSort();
+            this.pageAndSorter();
         }
         this.queryBuilder();
         return this.nativeSearchQueryBuilder.build();
     }
 
+    /**
+     * 查询类型设置
+     *
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private void searchType() {
         SearchType searchType = this.clazz.getAnnotation(SearchType.class);
         this.nativeSearchQueryBuilder.withSearchType(searchType.value());
     }
 
+    /**
+     * 过滤 / 排除字段设置
+     *
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private void fetchSourceFilter() {
         FetchSource fetchSource = this.clazz.getAnnotation(FetchSource.class);
         FetchSourceFilter fetchSourceFilter = new FetchSourceFilter(fetchSource.includes(), fetchSource.excludes());
         this.nativeSearchQueryBuilder.withSourceFilter(fetchSourceFilter);
     }
 
+    /**
+     * 批量高亮检索
+     *
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private void highlighters() {
         Highlighters highlighters = this.clazz.getAnnotation(Highlighters.class);
         HighlightBuilder.Field[] fields = Arrays.stream(highlighters.highlighters()).map(this::highlighter).toArray(HighlightBuilder.Field[]::new);
         this.nativeSearchQueryBuilder.withHighlightFields(fields);
     }
 
+    /**
+     * 高亮检索
+     *
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private void highlighter() {
         Highlighter highlighter = this.clazz.getAnnotation(Highlighter.class);
         HighlightBuilder.Field field = this.highlighter(highlighter);
         this.nativeSearchQueryBuilder.withHighlightFields(field);
     }
 
+    /**
+     * 高亮检索建构
+     *
+     * @param highlighter 注解
+     * @return 构建信息
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private HighlightBuilder.Field highlighter(Highlighter highlighter) {
         return new HighlightBuilder.Field(highlighter.field())
                 .preTags(highlighter.preTags())
@@ -162,22 +211,49 @@ public class NativeSearchQueryAssembly<T> {
                 .numOfFragments(highlighter.numOfFragments());
     }
 
+    /**
+     * 脚本排序设置
+     *
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private void scriptSort() {
         ScriptSorter scriptSorter = this.clazz.getAnnotation(ScriptSorter.class);
         ScriptSortBuilder scriptSortBuilder = SortBuilders.scriptSort(new Script(scriptSorter.script()), scriptSorter.scriptSortType());
         this.nativeSearchQueryBuilder.withSort(scriptSortBuilder);
     }
 
-    private void fieldSort() {
+    /**
+     * 分页并排序
+     *
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
+    private void pageAndSorter() {
         AbstractPageHelper abstractPageHelper = (AbstractPageHelper) this.condition;
         this.pageable(abstractPageHelper.getFrom(), abstractPageHelper.getSize());
         this.fieldSort(abstractPageHelper.getSorters());
     }
 
+    /**
+     * 分页
+     *
+     * @param from 起始
+     * @param size 数量
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private void pageable(int from, int size) {
         this.nativeSearchQueryBuilder.withPageable(PageRequest.of(from, size));
     }
 
+    /**
+     * 按字段排序
+     *
+     * @param sorters 排序条件
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private void fieldSort(List<AbstractPageHelper.Sorter> sorters) {
         if (CollectionUtils.isNotEmpty(sorters)) {
             sorters.forEach(sorter -> {
@@ -187,15 +263,26 @@ public class NativeSearchQueryAssembly<T> {
         }
     }
 
+    /**
+     * 嵌套聚合分析
+     *
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private void aggregations() {
         Aggregation[] aggregations = this.clazz.getAnnotation(Aggregations.class).aggregations();
+        // 嵌套聚合分析根节点集合
         List<Aggregation> roots = Arrays.stream(aggregations).filter(Aggregation::root).collect(Collectors.toList());
         if (CollectionUtils.isNotEmpty(roots)) {
             roots.forEach(aggregation -> {
+                // 根节点构建
                 AbstractAggregationBuilder<?> abstractAggregationBuilder = this.aggregationBuilder(aggregation);
+                // 向下递归
                 Aggregation recursiveAggregation = aggregation;
                 while (StringUtils.isNotEmpty(recursiveAggregation.subName())) {
+                    // 获取嵌套聚合检索注解
                     recursiveAggregation = this.subAggregation(recursiveAggregation.subName());
+                    // 聚合检索构建
                     AbstractAggregationBuilder<?> subAbstractAggregationBuilder = this.aggregationBuilder(recursiveAggregation);
                     abstractAggregationBuilder.subAggregation(subAbstractAggregationBuilder);
                 }
@@ -206,12 +293,27 @@ public class NativeSearchQueryAssembly<T> {
         }
     }
 
+    /**
+     * 聚合分析
+     *
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private void aggregation() {
         Aggregation aggregation = this.clazz.getAnnotation(Aggregation.class);
+        // 聚合检索构建
         AbstractAggregationBuilder<?> abstractAggregationBuilder = this.aggregationBuilder(aggregation);
         this.nativeSearchQueryBuilder.addAggregation(abstractAggregationBuilder);
     }
 
+    /**
+     * 聚合检索构建
+     *
+     * @param aggregation 注解
+     * @return 构建结果
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private AbstractAggregationBuilder<?> aggregationBuilder(Aggregation aggregation) {
         switch (aggregation.type()) {
             case AVG:
@@ -231,6 +333,14 @@ public class NativeSearchQueryAssembly<T> {
         }
     }
 
+    /**
+     * 获取嵌套聚合检索注解
+     *
+     * @param subName 子条件名称
+     * @return 注解
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private Aggregation subAggregation(String subName) {
         Aggregation[] aggregations = this.clazz.getAnnotation(Aggregations.class).aggregations();
         Optional<Aggregation> optional = Stream.of(aggregations).filter(aggregation -> aggregation.name().equals(subName)).findFirst();
@@ -240,30 +350,84 @@ public class NativeSearchQueryAssembly<T> {
         throw new IllegalArgumentException("Sub aggregation is not found.");
     }
 
-    private AvgAggregationBuilder avg(Aggregation aggregation) {
-        return AggregationBuilders.avg(aggregation.name()).field(aggregation.field());
-    }
-
+    /**
+     * 统计
+     *
+     * @param aggregation 注解
+     * @return 构建结果
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private ValueCountAggregationBuilder count(Aggregation aggregation) {
         return AggregationBuilders.count(aggregation.name()).field(aggregation.field());
     }
 
+    /**
+     * 平均值
+     *
+     * @param aggregation 注解
+     * @return 构建结果
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
+    private AvgAggregationBuilder avg(Aggregation aggregation) {
+        return AggregationBuilders.avg(aggregation.name()).field(aggregation.field());
+    }
+
+    /**
+     * 日期区间分组
+     *
+     * @param aggregation 注解
+     * @return 构建结果
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private DateHistogramAggregationBuilder dateHistogram(Aggregation aggregation) {
         return AggregationBuilders.dateHistogram(aggregation.name()).field(aggregation.field());
     }
 
+    /**
+     * 最大值
+     *
+     * @param aggregation 注解
+     * @return 构建结果
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private MaxAggregationBuilder max(Aggregation aggregation) {
         return AggregationBuilders.max(aggregation.name()).field(aggregation.field());
     }
 
+    /**
+     * 最小值
+     *
+     * @param aggregation 注解
+     * @return 构建结果
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private MinAggregationBuilder min(Aggregation aggregation) {
         return AggregationBuilders.min(aggregation.name()).field(aggregation.field());
     }
 
+    /**
+     * 求和
+     *
+     * @param aggregation 注解
+     * @return 构建结果
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private SumAggregationBuilder sum(Aggregation aggregation) {
         return AggregationBuilders.sum(aggregation.name()).field(aggregation.field());
     }
 
+    /**
+     * 检索条件构建
+     *
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private void queryBuilder() {
         List<String> excludes = ObjectUtils.defaultIfNull(this.cascadesQuery(), Collections.emptyList());
         Stream.of(this.clazz.getDeclaredFields()).forEach(field -> {
@@ -274,6 +438,13 @@ public class NativeSearchQueryAssembly<T> {
         this.nativeSearchQueryBuilder.withQuery(this.boolQueryBuilder);
     }
 
+    /**
+     * 批量级联检索
+     *
+     * @return 级联字段
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private List<String> cascadesQuery() {
         if (this.clazz.isAnnotationPresent(Cascades.class)) {
             Cascade[] cascades = this.clazz.getAnnotation(Cascades.class).cascades();
@@ -292,6 +463,13 @@ public class NativeSearchQueryAssembly<T> {
         return null;
     }
 
+    /**
+     * 级联检索
+     *
+     * @param cascade 注解
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private void cascadeQuery(Cascade cascade) {
         BoolQueryBuilder cascadeBoolQueryBuilder = QueryBuilders.boolQuery();
         Stream.of(cascade.fields()).forEach(fieldName -> {
@@ -305,6 +483,14 @@ public class NativeSearchQueryAssembly<T> {
         this.queryLink(this.boolQueryBuilder, cascadeBoolQueryBuilder, cascade.link());
     }
 
+    /**
+     * 按字段属性数据过滤
+     *
+     * @param field            字段
+     * @param boolQueryBuilder 数据过滤
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private void basicQueryAssembly(Field field, BoolQueryBuilder boolQueryBuilder) {
         if (field.isAnnotationPresent(RangeField.class)) {
             RangeField rangeField = field.getAnnotation(RangeField.class);
@@ -328,6 +514,15 @@ public class NativeSearchQueryAssembly<T> {
         }
     }
 
+    /**
+     * 区间检索
+     *
+     * @param field      字段
+     * @param rangeField 注解
+     * @return 构建结果
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private RangeQueryBuilder rangeQuery(Field field, RangeField rangeField) {
         KeyValue<String, Object> fieldValue = this.fieldValue(field, rangeField.field());
         RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery(fieldValue.getKey());
@@ -347,6 +542,15 @@ public class NativeSearchQueryAssembly<T> {
         return rangeQueryBuilder;
     }
 
+    /**
+     * 分词检索
+     *
+     * @param field       字段
+     * @param stringField 注解
+     * @return 构建结果
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private QueryStringQueryBuilder stringQuery(Field field, StringField stringField) {
         KeyValue<String, Object> fieldValue = this.fieldValue(field, stringField.field());
         return QueryBuilders.queryStringQuery((String) fieldValue.getValue())
@@ -354,11 +558,29 @@ public class NativeSearchQueryAssembly<T> {
                 .defaultOperator(stringField.operator());
     }
 
+    /**
+     * 非分词检索
+     *
+     * @param field     字段
+     * @param termField 注解
+     * @return 构建结果
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private TermQueryBuilder termQuery(Field field, TermField termField) {
         KeyValue<String, Object> fieldValue = this.fieldValue(field, termField.field());
         return QueryBuilders.termQuery(fieldValue.getKey(), fieldValue.getValue());
     }
 
+    /**
+     * 模糊检索
+     *
+     * @param field         字段
+     * @param wildcardField 注解
+     * @return 构建结果
+     * @author Tiny Chiang
+     * @since 1.0.0
+     */
     private WildcardQueryBuilder wildcardQuery(Field field, WildcardField wildcardField) {
         KeyValue<String, Object> fieldValue = this.fieldValue(field, wildcardField.field());
         return QueryBuilders.wildcardQuery(fieldValue.getKey(), (String) fieldValue.getValue());
