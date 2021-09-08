@@ -1,6 +1,5 @@
 package com.summer.frame.netty;
 
-
 import com.summer.frame.commons.exception.CustomizeException;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -79,8 +78,11 @@ public class SingleLatchTransmitter {
     private byte[] communicate(byte[] content) {
         // 限定并发为1
         CountDownLatch countDownLatch = new CountDownLatch(COUNT_DOWN_LATCH_SIZE);
-        ChannelInboundHandler channelInboundHandler = new ChannelInboundHandler(countDownLatch);
+        // 线程组
         EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
+        // 信道
+        ChannelInboundHandler channelInboundHandler = new ChannelInboundHandler(countDownLatch);
+        // 启动器
         Bootstrap bootstrap = this.bootstrapBuilder(eventLoopGroup, channelInboundHandler);
         // 建立通道
         ChannelFuture channelFuture = bootstrap.connect(ip, port);
@@ -105,10 +107,10 @@ public class SingleLatchTransmitter {
     }
 
     /**
-     * todo
+     * 启动器构建
      *
-     * @param eventLoopGroup
-     * @param channelInboundHandler
+     * @param eventLoopGroup        线程组
+     * @param channelInboundHandler 信道
      * @return 构建结果
      * @author Tiny Chiang
      * @since 1.0.0
