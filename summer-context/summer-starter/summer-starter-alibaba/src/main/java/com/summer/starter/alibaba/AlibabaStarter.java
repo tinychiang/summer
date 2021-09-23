@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 /**
- * <p>Spring Cloud Alibaba</p>
+ * Spring Cloud Alibaba
  *
  * @author Tiny Chiang
  * @version 1.0.0
