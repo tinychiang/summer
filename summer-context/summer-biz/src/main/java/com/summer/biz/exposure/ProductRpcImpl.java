@@ -4,8 +4,8 @@ import com.summer.api.ProductRpc;
 import com.summer.api.dto.ProductQueryDTO;
 import com.summer.api.vo.ProductQueryVO;
 import com.summer.db.mysql.mapper.ProductMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -17,15 +17,12 @@ import java.util.List;
  */
 public class ProductRpcImpl implements ProductRpc {
 
-    private final ProductMapper productMapper;
+    @Resource
+    private ProductMapper productMapper;
 
     @Override
     public List<ProductQueryVO> query(ProductQueryDTO productQueryDTO) {
         return null;
     }
 
-    @Autowired
-    public ProductRpcImpl(ProductMapper productMapper) {
-        this.productMapper = productMapper;
-    }
 }

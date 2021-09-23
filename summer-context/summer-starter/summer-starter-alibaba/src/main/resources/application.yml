@@ -63,6 +63,12 @@ spring:
       connection-timeout: 5
       read-timeout: 60
 
+dubbo:
+  registry:
+    address: nacos://127.0.0.1:8848
+  protocol:
+    port: 20890
+
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
   type-aliases-package: com.summer.db.mysql.entity
