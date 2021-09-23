@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
  * @date 2021-08-03
  */
 @Component
-public class RedisConfiguration {
+public class RedisConfigurer {
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {

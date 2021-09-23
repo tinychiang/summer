@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>Swagger2 配置</p>
+ * Swagger2 配置
  *
  * @author Tiny Chiang
  * @version 1.0.0
@@ -25,7 +25,7 @@ import java.util.List;
  */
 @EnableSwagger2
 @Configuration
-public class SwaggerConfiguration {
+public class SwaggerConfigurer {
 
     @Bean
     public Docket createRestApi() {

@@ -7,17 +7,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * <p>Web MVC配置</p>
+ * Web MVC配置
  *
  * @author Tiny Chiang
  * @version 1.0.0
  * @date 2021-07-26
  */
 @Configuration
-public class WebMvcConfiguration implements WebMvcConfigurer {
+public class WebMvcConfigurer implements
+        org.springframework.web.servlet.config.annotation.WebMvcConfigurer {
 
     /**
      * 跨域

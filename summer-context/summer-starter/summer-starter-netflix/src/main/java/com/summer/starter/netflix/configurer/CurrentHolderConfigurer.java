@@ -1,4 +1,4 @@
-package com.summer.starter.alibaba.configuration;
+package com.summer.starter.netflix.configurer;
 
 import com.summer.frame.commons.AbstractCurrentHolder;
 import com.summer.frame.redis.RedisCurrentHolder;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  * @date 2021-08-11
  */
 @Component
-public class CurrentHolderConfiguration {
+public class CurrentHolderConfigurer {
 
     @Bean
     public AbstractCurrentHolder<AbstractCurrentHolder.User> abstractCurrentHolder(@Autowired RedisTemplate<String, Object> redisTemplate) {
